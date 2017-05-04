@@ -63,19 +63,9 @@ namespace BS.Output.MantisBT.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap mantisbt_16x16 {
+        internal static System.Drawing.Bitmap mantisbt {
             get {
-                object obj = ResourceManager.GetObject("mantisbt_16x16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap mantisbt_64x32 {
-            get {
-                object obj = ResourceManager.GetObject("mantisbt_64x32", resourceCulture);
+                object obj = ResourceManager.GetObject("mantisbt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
