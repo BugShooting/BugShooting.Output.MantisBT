@@ -67,36 +67,40 @@ namespace BS.Output.MantisBT
     protected override Output EditOutput(IWin32Window Owner, Output Output)
     {
 
-      using (frmOutputEditDefault frmEdit = new frmOutputEditDefault(Output, "http://myserver/mantisbt", false))
-      {
-        if (frmEdit.ShowDialog(Owner) == DialogResult.OK)
-        {
-          return new Output(frmEdit.OutputName, 
-                            frmEdit.URL, 
-                            frmEdit.UseProxy, 
-                            frmEdit.ProxyAddress, 
-                            frmEdit.ProxyPort, 
-                            frmEdit.ProxyUseAuthentication, 
-                            frmEdit.ProxyUserName, 
-                            frmEdit.ProxyPassword, 
-                            frmEdit.LoginType, 
-                            frmEdit.UserName,
-                            frmEdit.Password, 
-                            frmEdit.FileNameType, 
-                            frmEdit.FileNameValue, 
-                            frmEdit.ImageFormat, 
-                            frmEdit.ImageQuality, 
-                            frmEdit.OpenItemInBrowser,
-                            Output.LastProjectID,
-                            Output.LastCategory,
-                            Output.LastIssueID);
-        }
-        else
-        {
-          return null;
-        }
-      }
+      EditOutput editOutput = new EditOutput(Output);
+
+      var ownerHelper = new System.Windows.Interop.WindowInteropHelper(editOutput);
+      ownerHelper.Owner = Owner.Handle;
       
+      if (editOutput.ShowDialog() == true) {
+
+        return null;
+        //return new Output(editOutput.OutputName,
+        //                  editOutput.Url,
+        //                  editOutput.UseProxy,
+        //                  editOutput.ProxyAddress,
+        //                  editOutput.ProxyPort,
+        //                  editOutput.ProxyUseAuthentication,
+        //                  editOutput.ProxyUserName,
+        //                  editOutput.ProxyPassword,
+        //                  editOutput.LoginType,
+        //                  editOutput.UserName,
+        //                  editOutput.Password,
+        //                  editOutput.FileNameType,
+        //                  editOutput.FileNameValue,
+        //                  editOutput.ImageFormat,
+        //                  editOutput.ImageQuality,
+        //                  editOutput.OpenItemInBrowser,
+        //                  Output.LastProjectID,
+        //                  Output.LastCategory,
+        //                  Output.LastIssueID);
+
+      }
+      else
+      {
+        return null; 
+      }
+
     }
 
     protected override OutputValueCollection SerializeOutput(Output Output)
@@ -156,7 +160,7 @@ namespace BS.Output.MantisBT
     protected override V3.SendResult SendAsync(Output Output, V3.ImageData ImageData)
     {
 
-      XXXXXXXXXXXXX;
+      // TODO
 
       return new V3.SendResult(V3.Result.Success);
 
