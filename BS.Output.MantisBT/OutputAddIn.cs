@@ -9,42 +9,32 @@ namespace BS.Output.MantisBT
 
     protected override Guid ID
     {
-      get
-      {
-        return new Guid("89E9E6D2-AA01-45db-BBF6-982AF57B4C03");
-      }
+      get  { return new Guid("1A5A1DA0-D629-43F3-943B-C93CAAF4549F"); }
     }
 
     protected override string Name
     {
-      get
-      {
-        return "MantisBT";
-      }
+      get { return "MantisBT"; }
     }
 
-    protected override Image Image
+    protected override Image Image64x32
     {
-      get
-      {
-        return Properties.Resources.mantisbt;
-      }
+      get  { return Properties.Resources.mantisbt_64x32; }
+    }
+
+    protected override Image Image16x16
+    {
+      get { return Properties.Resources.mantisbt_64x32; }
     }
 
     protected override bool Editable
     {
-      get
-      {
-        return true;
-      }
+      get { return true; }
     }
 
     protected override string Description
     {
-      get
-      {
-        return  XXXXXXXXXXXXXXXXXXXX;
-      }
+      get { return "Attach screenshots to Mantis BT Issues."; }
     }
     
     protected override Output CreateOutput(IWin32Window Owner)
@@ -119,7 +109,7 @@ namespace BS.Output.MantisBT
       outputValues.Add(new OutputValue("UseProxy", Convert.ToString(Output.UseProxy)));
       outputValues.Add(new OutputValue("ProxyAddress", Output.ProxyAddress));
       outputValues.Add(new OutputValue("ProxyPort", Convert.ToString(Output.ProxyPort)));
-      outputValues.Add(new OutputValue("ProxyUseAuthentication", Convert.ToString(Output.ProxyAuthentication)));
+      outputValues.Add(new OutputValue("ProxyAuthentication", Convert.ToString(Output.ProxyAuthentication)));
       outputValues.Add(new OutputValue("ProxyUserName", Output.ProxyUserName));
       outputValues.Add(new OutputValue("ProxyPassword", Output.ProxyPassword, true));
       outputValues.Add(new OutputValue("LoginType", Convert.ToString(Output.LoginType)));
@@ -142,11 +132,11 @@ namespace BS.Output.MantisBT
     {
 
       return new Output(OutputValues["Name", this.Name].Value,
-                        OutputValues["URL", ""].Value, 
+                        OutputValues["Url", ""].Value, 
                         Convert.ToBoolean(OutputValues["UseProxy", Convert.ToString(false)].Value),
                         OutputValues["ProxyAddress", ""].Value, 
                         Convert.ToInt32(OutputValues["ProxyPort", Convert.ToString(8080)].Value), 
-                        Convert.ToBoolean(OutputValues["ProxyUseAuthentication", Convert.ToString(false)].Value),
+                        Convert.ToBoolean(OutputValues["ProxyAuthentication", Convert.ToString(false)].Value),
                         OutputValues["ProxyUserName", string.Empty].Value, 
                         OutputValues["ProxyPassword", string.Empty].Value,
                         (LoginType)Enum.Parse(typeof(LoginType),OutputValues["LoginType", Convert.ToString(LoginType.OnDemand)].Value),
@@ -163,10 +153,12 @@ namespace BS.Output.MantisBT
 
     }
 
-    protected override SendResult SendAsync(Output Output, ImageData ImageData)
+    protected override V3.SendResult SendAsync(Output Output, V3.ImageData ImageData)
     {
 
       XXXXXXXXXXXXX;
+
+      return new V3.SendResult(V3.Result.Success);
 
     }
     

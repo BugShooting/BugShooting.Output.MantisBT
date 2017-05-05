@@ -61,7 +61,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\mantisbt.png" />
+    <None Include="Resources\mantisbt_64x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mantisbt_16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
