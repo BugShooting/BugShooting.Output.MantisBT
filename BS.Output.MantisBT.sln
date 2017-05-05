@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BS.Output.MantisBT", "BS.Output.MantisBT\BS.Output.MantisBT.csproj", "{72AE9E3B-42E3-444C-B460-F17A2CD6AD14}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{B2E2163B-9F60-46FD-8CDE-0979E411FC91}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\BS.Output.MantisBT.nupkg = NuGet\BS.Output.MantisBT.nupkg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
