@@ -42,12 +42,6 @@ namespace BS.Output.MantisBT
       
       Output output = new Output(Name, 
                                  String.Empty, 
-                                 false, 
-                                 String.Empty, 
-                                 8080, 
-                                 false, 
-                                 String.Empty,
-                                 String.Empty, 
                                  LoginType.OnDemand, 
                                  String.Empty, 
                                  String.Empty, 
@@ -110,12 +104,6 @@ namespace BS.Output.MantisBT
 
       outputValues.Add(new OutputValue("Name", Output.Name));
       outputValues.Add(new OutputValue("URL", Output.Url));
-      outputValues.Add(new OutputValue("UseProxy", Convert.ToString(Output.UseProxy)));
-      outputValues.Add(new OutputValue("ProxyAddress", Output.ProxyAddress));
-      outputValues.Add(new OutputValue("ProxyPort", Convert.ToString(Output.ProxyPort)));
-      outputValues.Add(new OutputValue("ProxyAuthentication", Convert.ToString(Output.ProxyAuthentication)));
-      outputValues.Add(new OutputValue("ProxyUserName", Output.ProxyUserName));
-      outputValues.Add(new OutputValue("ProxyPassword", Output.ProxyPassword, true));
       outputValues.Add(new OutputValue("LoginType", Convert.ToString(Output.LoginType)));
       outputValues.Add(new OutputValue("UserName", Output.UserName));
       outputValues.Add(new OutputValue("Password",Output.Password, true));
@@ -137,12 +125,6 @@ namespace BS.Output.MantisBT
 
       return new Output(OutputValues["Name", this.Name].Value,
                         OutputValues["Url", ""].Value, 
-                        Convert.ToBoolean(OutputValues["UseProxy", Convert.ToString(false)].Value),
-                        OutputValues["ProxyAddress", ""].Value, 
-                        Convert.ToInt32(OutputValues["ProxyPort", Convert.ToString(8080)].Value), 
-                        Convert.ToBoolean(OutputValues["ProxyAuthentication", Convert.ToString(false)].Value),
-                        OutputValues["ProxyUserName", string.Empty].Value, 
-                        OutputValues["ProxyPassword", string.Empty].Value,
                         (LoginType)Enum.Parse(typeof(LoginType),OutputValues["LoginType", Convert.ToString(LoginType.OnDemand)].Value),
                         OutputValues["UserName", ""].Value,
                         OutputValues["Password", ""].Value, 

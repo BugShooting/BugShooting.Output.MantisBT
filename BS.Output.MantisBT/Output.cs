@@ -5,25 +5,25 @@ namespace BS.Output.MantisBT
 
   public enum LoginType
   {
-    OnDemand,
-    FixedCredentials,
-    IntegratedAuthentication,
+    OnDemand = 0,
+    FixedCredentials = 1,
+    IntegratedAuthentication = 2,
   }
 
   public enum FileNameType
   {
-    FixedText,
-    DateTimeFormat,
-    RandomText,
-    ImageTitle,
+    FixedText = 0,
+    DateTimeFormat = 1,
+    RandomText = 2,
+    ImageTitle = 3,
   }
 
   public enum ImageFormat
   { 
-    Png,
-    Jpeg,
-    Gif,
-    Bmp,
+    Png = 0,
+    Jpeg = 1,
+    Gif = 2,
+    Bmp = 3,
   }
 
 
@@ -32,13 +32,6 @@ namespace BS.Output.MantisBT
     
     String name;
     string url;
-
-    Boolean useProxy;
-    string proxyAddress;
-    int proxyPort;
-    Boolean proxyAuthentication;
-    string proxyUserName;
-    string proxyPassword;
     
     LoginType loginType;
     string userName;
@@ -57,12 +50,6 @@ namespace BS.Output.MantisBT
 
     public Output(string name, 
                   string url, 
-                  bool useProxy, 
-                  string proxyAddress,
-                  int proxyPort, 
-                  bool proxyAuthentication, 
-                  string proxyUserName, 
-                  string proxyPassword, 
                   LoginType loginType, 
                   string userName,
                   string password, 
@@ -77,12 +64,6 @@ namespace BS.Output.MantisBT
     {
       this.name = name;
       this.url = url;
-      this.useProxy = useProxy;
-      this.proxyAddress = proxyAddress;
-      this.proxyPort = proxyPort;
-      this.proxyAuthentication = proxyAuthentication;
-      this.proxyUserName = proxyUserName;
-      this.proxyPassword = proxyPassword;
       this.loginType = loginType;
       this.userName = userName;
       this.password = password;
@@ -110,37 +91,7 @@ namespace BS.Output.MantisBT
     {
       get { return url; }
     }
-
-    public bool UseProxy
-    {
-      get { return useProxy; }
-    }
-
-    public string ProxyAddress
-    {
-      get { return proxyAddress; }
-    }
-
-    public Int32 ProxyPort
-    {
-      get { return proxyPort; }
-    }
-
-    public bool ProxyAuthentication
-    {
-      get { return proxyAuthentication; }
-    }
-
-    public string ProxyUserName
-    {
-      get { return proxyUserName; }
-    }
-
-    public string ProxyPassword
-    {
-      get { return proxyPassword; }
-    }
-
+       
     public string UserName
     {
       get { return userName; }

@@ -16,7 +16,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Name</Label>
-      <TextBox Grid.Column="1"></TextBox>
+      <TextBox Grid.Column="1" VerticalContentAlignment="Center" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -24,7 +24,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Url</Label>
-      <TextBox Grid.Column="1"></TextBox>
+      <TextBox Grid.Column="1" VerticalContentAlignment="Center" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -32,10 +32,10 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Login type</Label>
-      <ComboBox Grid.Column="1">
-        <ComboBoxItem Content="Enter credentials on-demand" />
-        <ComboBoxItem Content="Use predefined credentials" />
-        <ComboBoxItem Content="Use integrated authentication" />
+      <ComboBox Grid.Column="1" SelectedValuePath="Tag">
+        <ComboBoxItem Content="Enter credentials on-demand" Tag="0" />
+        <ComboBoxItem Content="Use predefined credentials" Tag="1" />
+        <ComboBoxItem Content="Use integrated authentication" Tag="2" />
       </ComboBox>
     </Grid>
     <Grid Margin="4">
@@ -44,7 +44,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">User</Label>
-      <TextBox Grid.Column="1"></TextBox>
+      <TextBox Grid.Column="1" VerticalContentAlignment="Center" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -52,11 +52,16 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Password</Label>
-      <TextBox Grid.Column="1"></TextBox>
+      <PasswordBox Grid.Column="1" VerticalContentAlignment="Center" />
     </Grid>
     <Grid Margin="4">
-      <CheckBox Content="Open item in browser after sending" />
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <CheckBox Grid.Column="1" Content="Open item in browser after sending" />
     </Grid>
+    <Separator />
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
       <Button Width="80" Height="24" Content="OK" Margin="4" />
       <Button Width="80" Height="24" Content="Cancel" Margin="4" />
