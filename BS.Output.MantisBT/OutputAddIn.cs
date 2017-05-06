@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace BS.Output.MantisBT
 {
-  class OutputAddIn: V3.OutputAddIn<Output>
+  public class OutputAddIn: V3.OutputAddIn<Output>
   {
 
     protected override Guid ID
