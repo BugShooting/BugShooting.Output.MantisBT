@@ -24,7 +24,7 @@ namespace BS.Output.MantisBT
 
     protected override Image Image16x16
     {
-      get { return Properties.Resources.mantisbt_64x32; }
+      get { return Properties.Resources.mantisbt_16x16 ; }
     }
 
     protected override bool Editable
@@ -45,8 +45,7 @@ namespace BS.Output.MantisBT
                                  String.Empty, 
                                  String.Empty, 
                                  "Screenshot",
-                                 ImageFormat.Png, 
-                                 100, 
+                                 ImageFormat.Bmp, 
                                  true,
                                  String.Empty,
                                  String.Empty, 
@@ -72,12 +71,10 @@ namespace BS.Output.MantisBT
                           editOutput.Password,
                           editOutput.FileName,
                           editOutput.ImageFormat,
-                          editOutput.ImageQuality,
                           editOutput.OpenItemInBrowser,
                           Output.LastProjectID,
                           Output.LastCategory,
                           Output.LastIssueID);
-
       }
       else
       {
@@ -98,7 +95,6 @@ namespace BS.Output.MantisBT
       outputValues.Add(new OutputValue("OpenIssueInBrowser", Convert.ToString(Output.OpenIssueInBrowser)));
       outputValues.Add(new OutputValue("FileName", Output.FileName));
       outputValues.Add(new OutputValue("ImageFormat", Convert.ToString(Output.ImageFormat)));
-      outputValues.Add(new OutputValue("ImageQuality", Convert.ToString(Output.ImageQuality)));
       outputValues.Add(new OutputValue("LastProjectID", Output.LastProjectID));
       outputValues.Add(new OutputValue("LastCategory", Output.LastCategory));
       outputValues.Add(new OutputValue("LastIssueID", Convert.ToString(Output.LastIssueID)));
@@ -116,7 +112,6 @@ namespace BS.Output.MantisBT
                         OutputValues["Password", ""].Value, 
                         OutputValues["FileName", string.Empty].Value, 
                         (ImageFormat)Enum.Parse(typeof(ImageFormat), OutputValues["ImageFormat", Convert.ToString(ImageFormat.Png)].Value),
-                        Convert.ToInt32(OutputValues["ImageQuality",Convert.ToString(100)].Value), 
                         Convert.ToBoolean(OutputValues["OpenIssueInBrowser", Convert.ToString(true)].Value),
                         OutputValues["LastProjectID", string.Empty].Value, 
                         OutputValues["LastCategory", string.Empty].Value, 

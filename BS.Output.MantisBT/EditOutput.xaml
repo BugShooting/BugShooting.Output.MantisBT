@@ -8,10 +8,11 @@
         mc:Ignorable="d" 
         Title="Mantis BT"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         Width="400"
         SizeToContent="Height">
 
-  <StackPanel Grid.IsSharedSizeScope="True">
+  <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
@@ -50,7 +51,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
-      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,93,0" ContextMenuService.IsEnabled="False" />
+      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,94,0" ContextMenuService.IsEnabled="False" />
       <Button x:Name="FileNamePattern"  Grid.Column="1" Content="%" Width="25" HorizontalAlignment="Right" Margin="0,0,68,0" Click="FileNamePattern_Click">
         <Button.ContextMenu>
           <ContextMenu>
@@ -79,10 +80,9 @@
       </Grid.ColumnDefinitions>
       <CheckBox x:Name="OpenItemInBrowserCheckBox" Grid.Column="1" Content="Open item in browser after sending" />
     </Grid>
-    <Separator />
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
-      <Button Width="80" Height="24" Content="OK" Margin="4" />
-      <Button Width="80" Height="24" Content="Cancel" Margin="4" />
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
+      <Button Width="80" Height="24" Content="OK" Margin="4" Click="OK_Click" />
+      <Button Width="80" Height="24" Content="Cancel" Margin="4" Click="Cancel_Click" />
     </StackPanel>
   </StackPanel>
 

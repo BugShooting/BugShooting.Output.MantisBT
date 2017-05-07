@@ -21,6 +21,14 @@ namespace BS.Output.MantisBT
     {
       InitializeComponent();
 
+      NameTextBox.Text = output.Name;
+      UrlTextBox.Text = output.Url;
+      UserTextBox.Text = output.UserName;
+      PasswordBox.Password = output.Password;
+      FileNameTextBox.Text = output.FileName;
+      ImageFormatComboBox.SelectedValue = (int)output.ImageFormat;
+      OpenItemInBrowserCheckBox.IsChecked = output.OpenIssueInBrowser;
+
     }
 
     public string OutputName
@@ -48,6 +56,11 @@ namespace BS.Output.MantisBT
       get { return FileNameTextBox.Text; }
     }
 
+    public ImageFormat ImageFormat
+    {
+      get { return (ImageFormat)Enum.Parse(typeof(ImageFormat), ImageFormatComboBox.SelectedValue.ToString()); }
+    }
+
     public bool OpenItemInBrowser
     {
       get { return OpenItemInBrowserCheckBox.IsChecked.Value; }
@@ -73,6 +86,16 @@ namespace BS.Output.MantisBT
       FileNameTextBox.SelectionStart = selectionStart + item.Header.ToString().Length;
       FileNameTextBox.Focus();
 
+    }
+
+    private void OK_Click(object sender, RoutedEventArgs e)
+    {
+      this.DialogResult = true;
+    }
+
+    private void Cancel_Click(object sender, RoutedEventArgs e)
+    {
+      this.DialogResult = false;
     }
 
   }

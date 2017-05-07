@@ -23,7 +23,6 @@ namespace BS.Output.MantisBT
 
     String fileName;
     ImageFormat imageFormat;
-    int imageQuality;
 
     Boolean openIssueInBrowser;
 
@@ -37,7 +36,6 @@ namespace BS.Output.MantisBT
                   string password, 
                   string fileName, 
                   ImageFormat imageFormat,
-                  int imageQuality, 
                   bool openIssueInBrowser, 
                   string lastProjectID, 
                   string lastCategory,
@@ -49,7 +47,6 @@ namespace BS.Output.MantisBT
       this.password = password;
       this.fileName = fileName;
       this.imageFormat = imageFormat;
-      this.imageQuality = imageQuality;
       this.openIssueInBrowser = openIssueInBrowser;
       this.lastProjectID = lastProjectID;
       this.lastCategory = lastCategory;
@@ -101,11 +98,6 @@ namespace BS.Output.MantisBT
       get { return imageFormat; }
     }
 
-    public int ImageQuality
-    {
-      get { return imageQuality; }
-    }
-    
     public bool OpenIssueInBrowser
     {
       get { return openIssueInBrowser; }
