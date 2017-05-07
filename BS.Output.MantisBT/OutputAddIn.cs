@@ -42,11 +42,9 @@ namespace BS.Output.MantisBT
       
       Output output = new Output(Name, 
                                  String.Empty, 
-                                 LoginType.OnDemand, 
                                  String.Empty, 
                                  String.Empty, 
-                                 FileNameType.RandomText, 
-                                 String.Empty, 
+                                 "Screenshot",
                                  ImageFormat.Png, 
                                  100, 
                                  true,
@@ -68,26 +66,17 @@ namespace BS.Output.MantisBT
       
       if (editOutput.ShowDialog() == true) {
 
-        return null;
-        //return new Output(editOutput.OutputName,
-        //                  editOutput.Url,
-        //                  editOutput.UseProxy,
-        //                  editOutput.ProxyAddress,
-        //                  editOutput.ProxyPort,
-        //                  editOutput.ProxyUseAuthentication,
-        //                  editOutput.ProxyUserName,
-        //                  editOutput.ProxyPassword,
-        //                  editOutput.LoginType,
-        //                  editOutput.UserName,
-        //                  editOutput.Password,
-        //                  editOutput.FileNameType,
-        //                  editOutput.FileNameValue,
-        //                  editOutput.ImageFormat,
-        //                  editOutput.ImageQuality,
-        //                  editOutput.OpenItemInBrowser,
-        //                  Output.LastProjectID,
-        //                  Output.LastCategory,
-        //                  Output.LastIssueID);
+        return new Output(editOutput.OutputName,
+                          editOutput.Url,
+                          editOutput.UserName,
+                          editOutput.Password,
+                          editOutput.FileName,
+                          editOutput.ImageFormat,
+                          editOutput.ImageQuality,
+                          editOutput.OpenItemInBrowser,
+                          Output.LastProjectID,
+                          Output.LastCategory,
+                          Output.LastIssueID);
 
       }
       else
@@ -104,12 +93,10 @@ namespace BS.Output.MantisBT
 
       outputValues.Add(new OutputValue("Name", Output.Name));
       outputValues.Add(new OutputValue("URL", Output.Url));
-      outputValues.Add(new OutputValue("LoginType", Convert.ToString(Output.LoginType)));
       outputValues.Add(new OutputValue("UserName", Output.UserName));
       outputValues.Add(new OutputValue("Password",Output.Password, true));
       outputValues.Add(new OutputValue("OpenIssueInBrowser", Convert.ToString(Output.OpenIssueInBrowser)));
-      outputValues.Add(new OutputValue("FileNameType", Convert.ToString(Output.FileNameType)));
-      outputValues.Add(new OutputValue("FileNameValue", Output.FileNameValue));
+      outputValues.Add(new OutputValue("FileName", Output.FileName));
       outputValues.Add(new OutputValue("ImageFormat", Convert.ToString(Output.ImageFormat)));
       outputValues.Add(new OutputValue("ImageQuality", Convert.ToString(Output.ImageQuality)));
       outputValues.Add(new OutputValue("LastProjectID", Output.LastProjectID));
@@ -125,11 +112,9 @@ namespace BS.Output.MantisBT
 
       return new Output(OutputValues["Name", this.Name].Value,
                         OutputValues["Url", ""].Value, 
-                        (LoginType)Enum.Parse(typeof(LoginType),OutputValues["LoginType", Convert.ToString(LoginType.OnDemand)].Value),
                         OutputValues["UserName", ""].Value,
                         OutputValues["Password", ""].Value, 
-                        (FileNameType)Enum.Parse(typeof(FileNameType), OutputValues["FileNameType", Convert.ToString(FileNameType.RandomText)].Value),
-                        OutputValues["FileNameValue", string.Empty].Value, 
+                        OutputValues["FileName", string.Empty].Value, 
                         (ImageFormat)Enum.Parse(typeof(ImageFormat), OutputValues["ImageFormat", Convert.ToString(ImageFormat.Png)].Value),
                         Convert.ToInt32(OutputValues["ImageQuality",Convert.ToString(100)].Value), 
                         Convert.ToBoolean(OutputValues["OpenIssueInBrowser", Convert.ToString(true)].Value),

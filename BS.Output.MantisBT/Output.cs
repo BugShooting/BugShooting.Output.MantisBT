@@ -3,21 +3,6 @@
 namespace BS.Output.MantisBT
 {
 
-  public enum LoginType
-  {
-    OnDemand = 0,
-    FixedCredentials = 1,
-    IntegratedAuthentication = 2,
-  }
-
-  public enum FileNameType
-  {
-    FixedText = 0,
-    DateTimeFormat = 1,
-    RandomText = 2,
-    ImageTitle = 3,
-  }
-
   public enum ImageFormat
   { 
     Png = 0,
@@ -32,13 +17,11 @@ namespace BS.Output.MantisBT
     
     String name;
     string url;
-    
-    LoginType loginType;
+
     string userName;
     string password;
 
-    FileNameType fileNameType;
-    String fileNameValue;
+    String fileName;
     ImageFormat imageFormat;
     int imageQuality;
 
@@ -50,11 +33,9 @@ namespace BS.Output.MantisBT
 
     public Output(string name, 
                   string url, 
-                  LoginType loginType, 
                   string userName,
                   string password, 
-                  FileNameType fileNameType, 
-                  string fileNameValue, 
+                  string fileName, 
                   ImageFormat imageFormat,
                   int imageQuality, 
                   bool openIssueInBrowser, 
@@ -64,11 +45,9 @@ namespace BS.Output.MantisBT
     {
       this.name = name;
       this.url = url;
-      this.loginType = loginType;
       this.userName = userName;
       this.password = password;
-      this.fileNameType = fileNameType;
-      this.fileNameValue = fileNameValue;
+      this.fileName = fileName;
       this.imageFormat = imageFormat;
       this.imageQuality = imageQuality;
       this.openIssueInBrowser = openIssueInBrowser;
@@ -107,24 +86,14 @@ namespace BS.Output.MantisBT
       get { return false; }
     }
 
-    public LoginType LoginType
-    {
-      get { return loginType; }
-    }
-
     public bool FileNameAvailable
     {
       get { return true; }
     }
-
-    public FileNameType FileNameType
+    
+    public string FileName
     {
-      get { return fileNameType; }
-    }
-
-    public string FileNameValue
-    {
-      get { return fileNameValue; }
+      get { return fileName; }
     }
 
     public ImageFormat ImageFormat
