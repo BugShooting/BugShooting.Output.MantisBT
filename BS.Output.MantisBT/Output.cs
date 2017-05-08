@@ -3,29 +3,16 @@
 namespace BS.Output.MantisBT
 {
 
-  public enum ImageFormat
-  { 
-    Png = 0,
-    Jpeg = 1,
-    Gif = 2,
-    Bmp = 3,
-  }
-
-
   public class Output: IOutput 
   {
     
-    String name;
+    string name;
     string url;
-
     string userName;
     string password;
-
-    String fileName;
-    ImageFormat imageFormat;
-
-    Boolean openIssueInBrowser;
-
+    string fileName;
+    string fileExtention;
+    bool openIssueInBrowser;
     string lastProjectID;
     string lastCategory;
     int lastIssueID;
@@ -35,7 +22,7 @@ namespace BS.Output.MantisBT
                   string userName,
                   string password, 
                   string fileName, 
-                  ImageFormat imageFormat,
+                  string fileExtention,
                   bool openIssueInBrowser, 
                   string lastProjectID, 
                   string lastCategory,
@@ -46,7 +33,7 @@ namespace BS.Output.MantisBT
       this.userName = userName;
       this.password = password;
       this.fileName = fileName;
-      this.imageFormat = imageFormat;
+      this.fileExtention = fileExtention;
       this.openIssueInBrowser = openIssueInBrowser;
       this.lastProjectID = lastProjectID;
       this.lastCategory = lastCategory;
@@ -93,9 +80,9 @@ namespace BS.Output.MantisBT
       get { return fileName; }
     }
 
-    public ImageFormat ImageFormat
+    public string FileExtention
     {
-      get { return imageFormat; }
+      get { return fileExtention; }
     }
 
     public bool OpenIssueInBrowser

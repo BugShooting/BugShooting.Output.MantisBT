@@ -21,14 +21,35 @@ namespace BS.Output.MantisBT
     {
       InitializeComponent();
 
+      foreach (string fileNameReplacement in V3.FileHelper.GetFileNameReplacements())
+      {
+        MenuItem item = new MenuItem();
+        item.Header = fileNameReplacement;
+        item.Click += FileNameReplacementItem_Click;
+        FileNameReplacementList.Items.Add(item);
+      }
+
+      foreach (string fileExtention in V3.FileHelper.GetFileExtentions())
+      {
+        ComboBoxItem item = new ComboBoxItem();
+        item.Content = "." + fileExtention;
+        item.Tag = fileExtention;
+        FileExtentionList.Items.Add(item);
+      }
+
       NameTextBox.Text = output.Name;
       UrlTextBox.Text = output.Url;
       UserTextBox.Text = output.UserName;
       PasswordBox.Password = output.Password;
       FileNameTextBox.Text = output.FileName;
-      ImageFormatComboBox.SelectedValue = (int)output.ImageFormat;
+      FileExtentionList.SelectedValue = output.FileExtention;
       OpenItemInBrowserCheckBox.IsChecked = output.OpenIssueInBrowser;
 
+    }
+
+    private void Item_Click(object sender, RoutedEventArgs e)
+    {
+      throw new NotImplementedException();
     }
 
     public string OutputName
@@ -56,9 +77,9 @@ namespace BS.Output.MantisBT
       get { return FileNameTextBox.Text; }
     }
 
-    public ImageFormat ImageFormat
+    public string FileExtention
     {
-      get { return (ImageFormat)Enum.Parse(typeof(ImageFormat), ImageFormatComboBox.SelectedValue.ToString()); }
+      get { return FileExtentionList.SelectedValue.ToString(); }
     }
 
     public bool OpenItemInBrowser
@@ -66,15 +87,15 @@ namespace BS.Output.MantisBT
       get { return OpenItemInBrowserCheckBox.IsChecked.Value; }
     }
 
-    private void FileNamePattern_Click(object sender, RoutedEventArgs e)
+    private void FileNameReplacement_Click(object sender, RoutedEventArgs e)
     {
-      FileNamePattern.ContextMenu.IsEnabled = true;
-      FileNamePattern.ContextMenu.PlacementTarget = FileNamePattern;
-      FileNamePattern.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
-      FileNamePattern.ContextMenu.IsOpen = true;
+      FileNameReplacement.ContextMenu.IsEnabled = true;
+      FileNameReplacement.ContextMenu.PlacementTarget = FileNameReplacement;
+      FileNameReplacement.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+      FileNameReplacement.ContextMenu.IsOpen = true;
     }
 
-    private void FileNamePatternItem_Click(object sender, RoutedEventArgs e)
+    private void FileNameReplacementItem_Click(object sender, RoutedEventArgs e)
     {
 
       MenuItem item = (MenuItem)sender;

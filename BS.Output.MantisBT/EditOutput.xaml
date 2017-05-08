@@ -52,26 +52,12 @@
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
       <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,94,0" ContextMenuService.IsEnabled="False" />
-      <Button x:Name="FileNamePattern"  Grid.Column="1" Content="%" Width="25" HorizontalAlignment="Right" Margin="0,0,68,0" Click="FileNamePattern_Click">
+      <Button x:Name="FileNameReplacement"  Grid.Column="1" Content="%" Width="25" HorizontalAlignment="Right" Margin="0,0,68,0" Click="FileNameReplacement_Click">
         <Button.ContextMenu>
-          <ContextMenu>
-            <MenuItem Header="%title%" Click="FileNamePatternItem_Click" />
-            <MenuItem Header="%random%" Click="FileNamePatternItem_Click" />
-            <MenuItem Header="%year%" Click="FileNamePatternItem_Click" />
-            <MenuItem Header="%month%" Click="FileNamePatternItem_Click" />
-            <MenuItem Header="%day%" Click="FileNamePatternItem_Click" />
-            <MenuItem Header="%hour%" Click="FileNamePatternItem_Click" />
-            <MenuItem Header="%minute%" Click="FileNamePatternItem_Click" />
-            <MenuItem Header="%second%" Click="FileNamePatternItem_Click" />
-          </ContextMenu>
+          <ContextMenu x:Name="FileNameReplacementList" />
         </Button.ContextMenu>
       </Button>
-      <ComboBox x:Name="ImageFormatComboBox" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" SelectedValue="0">
-        <ComboBoxItem Content=".png" Tag="0" />
-        <ComboBoxItem Content=".jpeg" Tag="1" />
-        <ComboBoxItem Content=".gif" Tag="2" />
-        <ComboBoxItem Content=".bmp" Tag="3" />
-      </ComboBox>
+      <ComboBox x:Name="FileExtentionList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>

@@ -45,7 +45,7 @@ namespace BS.Output.MantisBT
                                  String.Empty, 
                                  String.Empty, 
                                  "Screenshot",
-                                 ImageFormat.Bmp, 
+                                 "png", 
                                  true,
                                  String.Empty,
                                  String.Empty, 
@@ -70,7 +70,7 @@ namespace BS.Output.MantisBT
                           editOutput.UserName,
                           editOutput.Password,
                           editOutput.FileName,
-                          editOutput.ImageFormat,
+                          editOutput.FileExtention,
                           editOutput.OpenItemInBrowser,
                           Output.LastProjectID,
                           Output.LastCategory,
@@ -94,7 +94,7 @@ namespace BS.Output.MantisBT
       outputValues.Add(new OutputValue("Password",Output.Password, true));
       outputValues.Add(new OutputValue("OpenIssueInBrowser", Convert.ToString(Output.OpenIssueInBrowser)));
       outputValues.Add(new OutputValue("FileName", Output.FileName));
-      outputValues.Add(new OutputValue("ImageFormat", Convert.ToString(Output.ImageFormat)));
+      outputValues.Add(new OutputValue("FileExtention", Output.FileExtention));
       outputValues.Add(new OutputValue("LastProjectID", Output.LastProjectID));
       outputValues.Add(new OutputValue("LastCategory", Output.LastCategory));
       outputValues.Add(new OutputValue("LastIssueID", Convert.ToString(Output.LastIssueID)));
@@ -110,8 +110,8 @@ namespace BS.Output.MantisBT
                         OutputValues["Url", ""].Value, 
                         OutputValues["UserName", ""].Value,
                         OutputValues["Password", ""].Value, 
-                        OutputValues["FileName", string.Empty].Value, 
-                        (ImageFormat)Enum.Parse(typeof(ImageFormat), OutputValues["ImageFormat", Convert.ToString(ImageFormat.Png)].Value),
+                        OutputValues["FileName", "Screenshot"].Value, 
+                        OutputValues["FileExtention", "png"].Value,
                         Convert.ToBoolean(OutputValues["OpenIssueInBrowser", Convert.ToString(true)].Value),
                         OutputValues["LastProjectID", string.Empty].Value, 
                         OutputValues["LastCategory", string.Empty].Value, 
