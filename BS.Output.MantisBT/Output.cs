@@ -64,17 +64,7 @@ namespace BS.Output.MantisBT
     {
       get { return password; }
     }
-
-    public bool CanIntegratedAuthentication
-    {
-      get { return false; }
-    }
-
-    public bool FileNameAvailable
-    {
-      get { return true; }
-    }
-    
+          
     public string FileName
     {
       get { return fileName; }

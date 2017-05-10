@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ServiceModel;
+using System.Web;
+using BS.Output.MantisBT.MantisConnect_2_4_0
 
 namespace BS.Output.MantisBT
 {
@@ -122,11 +125,143 @@ namespace BS.Output.MantisBT
     protected override V3.SendResult SendAsync(Output Output, V3.ImageData ImageData)
     {
 
-      // TODO
+      try
+      {
+     
+        string userName = Output.UserName;
+        string password = Output.Password;
 
-      return new V3.SendResult(V3.Result.Success);
+        while (true)
+        {
+         
+          if ((string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password)) && 
+              !LoginHelper.ShowCredentialsDialog(userName, password))
+          {
+            return new V3.SendResult(V3.Result.Canceled);
+          }
+           
+
+          MantisConnectPortTypeClient mantisConnect = new MantisConnectPortTypeClient();
+          mantisConnect.Endpoint.Address= new EndpointAddress(Output.Url + "/api/soap/mantisconnect.php");
+      
+
+          try
+          {
+            // TODO
+            //object[] objArgs = new object[6];
+            //objArgs(0) = objOutput;
+            //objArgs(1) = objImageData;
+            //objArgs(2) = mantisConnect;
+            //objArgs(3) = objLoginHelper.UserName;
+            //objArgs(4) = objLoginHelper.Password;
+            //if (!Convert.ToBoolean(MainThreadHelper.InvokeOnMainThread(new GetSendOptionsDelegate(GetSendOptions), objArgs)))
+            //{
+            //  return new V3.SendResult(V3.Result.Canceled);
+            //}
+            //clsSendOptions objOptions = (clsSendOptions)objArgs(5);
+
+
+            V3.FileData fileData = V3.FileHelper.GetFileData(Output.FileName, Output.FileExtention, ImageData);
+
+            string strIssueID = null;
+            string strProjectID = null;
+            string strCategory = null;
+
+
+            if (objOptions.CreateNewIssue)
+            {
+              ObjectRef[] priorities = mantisConnect.mc_enum_priorities(userName, password);
+              ObjectRef[] severities = mantisConnect.mc_enum_severities(userName, password);
+
+              ObjectRef objProjectRef = new ObjectRef();
+              objProjectRef.id = objOptions.ProjectID;
+              objProjectRef.name = objOptions.ProjectName;
+
+              IssueData objIssue = new IssueData();
+              objIssue.summary = HttpUtility.HtmlEncode(objOptions.Summary);
+              objIssue.description = HttpUtility.HtmlEncode(objOptions.Description);
+              objIssue.priority = priorities[0];
+              objIssue.severity = severities[0];
+              objIssue.status = new ObjectRef();
+              objIssue.date_submitted = DateTime.UtcNow;
+              objIssue.category = objOptions.Category;
+              objIssue.reproducibility = new ObjectRef();
+              objIssue.resolution = new ObjectRef();
+              objIssue.project = objProjectRef;
+              objIssue.projection = new ObjectRef();
+              objIssue.eta = new ObjectRef();
+              objIssue.view_state = new ObjectRef();
+
+              strIssueID = mantisConnect.mc_issue_add(userName, password, objIssue);
+
+              strProjectID = objOptions.ProjectID;
+              strCategory = objOptions.Category;
+
+
+            }
+            else
+            {
+              strIssueID = Convert.ToString(objOptions.IssueID);
+              strProjectID = Output.LastProjectID;
+              strCategory = Output.LastCategory;
+
+
+              if (!string.IsNullOrEmpty(objOptions.Note))
+              {
+                IssueNoteData objNote = new IssueNoteData();
+                objNote.text = HttpUtility.HtmlEncode(objOptions.Note);
+                objNote.date_submitted = DateTime.UtcNow;
+                objNote.view_state = new ObjectRef();
+
+                mantisConnect.mc_issue_note_add(userName, password, strIssueID, objNote);
+
+              }
+
+            }
+
+            mantisConnect.mc_issue_attachment_add(userName, password, strIssueID, fileData.FullFileName, fileData.MimeType, fileData.FileBytes);
+
+
+            if (Output.OpenIssueInBrowser)
+            {
+              WebHelper.OpenUrl(Output.Url + "/view.php?id=" + strIssueID);
+            }
+
+            return new V3.SendResult(V3.Result.Success, 
+                                     new Output(Output.Name, 
+                                                Output.Url,
+                                                userName,
+                                                password,
+                                                Output.FileName,
+                                                Output.FileExtention,
+                                                Output.OpenIssueInBrowser, 
+                                                strProjectID, 
+                                                strCategory, 
+                                                Convert.ToInt32(strIssueID)));
+
+          }
+          catch (System.Net.WebException ex)
+          {
+            return new V3.SendResult(V3.Result.Failed, ex.Message);
+          }
+          catch (System.Web.Services.Protocols.SoapException ex)
+          {
+            return new V3.SendResult(V3.Result.Failed, ex.Message);
+          }
+          catch
+          {
+            // Login failed
+          }
+
+        }
+
+      }
+      catch (Exception ex)
+      {
+        return new V3.SendResult(V3.Result.Failed, ex.Message);
+      }
 
     }
-    
+
   }
 }
