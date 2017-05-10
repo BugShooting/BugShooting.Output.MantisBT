@@ -47,11 +47,6 @@ namespace BS.Output.MantisBT
 
     }
 
-    private void Item_Click(object sender, RoutedEventArgs e)
-    {
-      throw new NotImplementedException();
-    }
-
     public string OutputName
     {
       get { return NameTextBox.Text; }

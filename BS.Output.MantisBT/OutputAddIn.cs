@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.ServiceModel;
 using System.Web;
-using BS.Output.MantisBT.MantisConnect_2_4_0
+using BS.Output.MantisBT.MantisConnect_2_4_0;
 
 namespace BS.Output.MantisBT
 {
@@ -134,10 +134,18 @@ namespace BS.Output.MantisBT
         while (true)
         {
          
-          if ((string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password)) && 
-              !LoginHelper.ShowCredentialsDialog(userName, password))
+          if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
           {
-            return new V3.SendResult(V3.Result.Canceled);
+
+            Credentials credentials = new Credentials(userName, password);
+            if (credentials.ShowDialog() != true)
+            {
+              return new V3.SendResult(V3.Result.Canceled);
+            }
+
+            userName = credentials.UserName;
+            password = credentials.Password;
+            
           }
            
 
@@ -167,57 +175,57 @@ namespace BS.Output.MantisBT
             string strProjectID = null;
             string strCategory = null;
 
+            // TODO
+            //if (objOptions.CreateNewIssue)
+            //{
+            //  ObjectRef[] priorities = mantisConnect.mc_enum_priorities(userName, password);
+            //  ObjectRef[] severities = mantisConnect.mc_enum_severities(userName, password);
 
-            if (objOptions.CreateNewIssue)
-            {
-              ObjectRef[] priorities = mantisConnect.mc_enum_priorities(userName, password);
-              ObjectRef[] severities = mantisConnect.mc_enum_severities(userName, password);
+            //  ObjectRef objProjectRef = new ObjectRef();
+            //  objProjectRef.id = objOptions.ProjectID;
+            //  objProjectRef.name = objOptions.ProjectName;
 
-              ObjectRef objProjectRef = new ObjectRef();
-              objProjectRef.id = objOptions.ProjectID;
-              objProjectRef.name = objOptions.ProjectName;
+            //  IssueData objIssue = new IssueData();
+            //  objIssue.summary = HttpUtility.HtmlEncode(objOptions.Summary);
+            //  objIssue.description = HttpUtility.HtmlEncode(objOptions.Description);
+            //  objIssue.priority = priorities[0];
+            //  objIssue.severity = severities[0];
+            //  objIssue.status = new ObjectRef();
+            //  objIssue.date_submitted = DateTime.UtcNow;
+            //  objIssue.category = objOptions.Category;
+            //  objIssue.reproducibility = new ObjectRef();
+            //  objIssue.resolution = new ObjectRef();
+            //  objIssue.project = objProjectRef;
+            //  objIssue.projection = new ObjectRef();
+            //  objIssue.eta = new ObjectRef();
+            //  objIssue.view_state = new ObjectRef();
 
-              IssueData objIssue = new IssueData();
-              objIssue.summary = HttpUtility.HtmlEncode(objOptions.Summary);
-              objIssue.description = HttpUtility.HtmlEncode(objOptions.Description);
-              objIssue.priority = priorities[0];
-              objIssue.severity = severities[0];
-              objIssue.status = new ObjectRef();
-              objIssue.date_submitted = DateTime.UtcNow;
-              objIssue.category = objOptions.Category;
-              objIssue.reproducibility = new ObjectRef();
-              objIssue.resolution = new ObjectRef();
-              objIssue.project = objProjectRef;
-              objIssue.projection = new ObjectRef();
-              objIssue.eta = new ObjectRef();
-              objIssue.view_state = new ObjectRef();
+            //  strIssueID = mantisConnect.mc_issue_add(userName, password, objIssue);
 
-              strIssueID = mantisConnect.mc_issue_add(userName, password, objIssue);
-
-              strProjectID = objOptions.ProjectID;
-              strCategory = objOptions.Category;
-
-
-            }
-            else
-            {
-              strIssueID = Convert.ToString(objOptions.IssueID);
-              strProjectID = Output.LastProjectID;
-              strCategory = Output.LastCategory;
+            //  strProjectID = objOptions.ProjectID;
+            //  strCategory = objOptions.Category;
 
 
-              if (!string.IsNullOrEmpty(objOptions.Note))
-              {
-                IssueNoteData objNote = new IssueNoteData();
-                objNote.text = HttpUtility.HtmlEncode(objOptions.Note);
-                objNote.date_submitted = DateTime.UtcNow;
-                objNote.view_state = new ObjectRef();
+            //}
+            //else
+            //{
+            //  strIssueID = Convert.ToString(objOptions.IssueID);
+            //  strProjectID = Output.LastProjectID;
+            //  strCategory = Output.LastCategory;
 
-                mantisConnect.mc_issue_note_add(userName, password, strIssueID, objNote);
 
-              }
+            //  if (!string.IsNullOrEmpty(objOptions.Note))
+            //  {
+            //    IssueNoteData objNote = new IssueNoteData();
+            //    objNote.text = HttpUtility.HtmlEncode(objOptions.Note);
+            //    objNote.date_submitted = DateTime.UtcNow;
+            //    objNote.view_state = new ObjectRef();
 
-            }
+            //    mantisConnect.mc_issue_note_add(userName, password, strIssueID, objNote);
+
+            //  }
+
+            //}
 
             mantisConnect.mc_issue_attachment_add(userName, password, strIssueID, fileData.FullFileName, fileData.MimeType, fileData.FileBytes);
 
