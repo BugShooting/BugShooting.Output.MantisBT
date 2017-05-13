@@ -17,26 +17,30 @@ namespace BS.Output.MantisBT
 {
   partial class Login : Window
   {
-    public Login(string url, string userName, string password)
-    {
-      InitializeComponent();
 
-      Url.Content = url;
-      UserTextBox.Text = userName;
-      PasswordBox.Password = password;
-     
+    public string Url
+    {
+      set { UrlLabel.Content = value; }
     }
 
     public string UserName
     {
       get { return UserTextBox.Text; }
+      set { UserTextBox.Text = value; }
     }
 
     public string Password
     {
       get { return PasswordBox.Password; }
+      set { PasswordBox.Password = value; }
     }
-    
+
+    public bool Remember
+    {
+      get { return RememberCheckBox.IsChecked.Value; }
+      set { RememberCheckBox.IsChecked = value; }
+    }
+
     private void OK_Click(object sender, RoutedEventArgs e)
     {
       this.DialogResult = true;
@@ -45,6 +49,22 @@ namespace BS.Output.MantisBT
     private void Cancel_Click(object sender, RoutedEventArgs e)
     {
       this.DialogResult = false;
+    }
+
+    protected override void OnPreviewKeyDown(KeyEventArgs e)
+    {
+      base.OnPreviewKeyDown(e);
+
+      switch (e.Key)
+      {
+        case Key.Enter:
+          OK_Click(this, e);
+          break;
+        case Key.Escape:
+          Cancel_Click(this, e);
+          break;
+      }
+
     }
 
   }

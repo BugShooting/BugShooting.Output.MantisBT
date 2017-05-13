@@ -92,7 +92,7 @@ namespace BS.Output.MantisBT
       OutputValueCollection outputValues = new OutputValueCollection();
 
       outputValues.Add(new OutputValue("Name", Output.Name));
-      outputValues.Add(new OutputValue("URL", Output.Url));
+      outputValues.Add(new OutputValue("Url", Output.Url));
       outputValues.Add(new OutputValue("UserName", Output.UserName));
       outputValues.Add(new OutputValue("Password",Output.Password, true));
       outputValues.Add(new OutputValue("OpenIssueInBrowser", Convert.ToString(Output.OpenIssueInBrowser)));
@@ -127,17 +127,38 @@ namespace BS.Output.MantisBT
 
       try
       {
-     
+               
+        HttpBindingBase binding;
+        if (Output.Url.StartsWith("https", StringComparison.InvariantCultureIgnoreCase))
+        {
+          binding = new BasicHttpsBinding();
+        }
+        else
+        {
+          binding = new BasicHttpBinding();
+        }
+        binding.MaxBufferSize = int.MaxValue;
+        binding.MaxReceivedMessageSize = int.MaxValue;
+        
+        MantisConnectPortTypeClient mantisConnect = new MantisConnectPortTypeClient(binding, new EndpointAddress(Output.Url + "/api/soap/mantisconnect.php"));
+
         string userName = Output.UserName;
         string password = Output.Password;
+        bool showLogin = string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password);
+        bool rememberCredentials = false;
 
         while (true)
         {
          
-          if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+          if (showLogin)
           {
 
-            Login login = new Login(Output.Url, userName, password);
+            Login login = new Login();
+            login.Url = Output.Url;
+            login.UserName = userName;
+            login.Password = password;
+            login.Remember = rememberCredentials;
+
             if (login.ShowDialog() != true)
             {
               return new V3.SendResult(V3.Result.Canceled);
@@ -145,14 +166,10 @@ namespace BS.Output.MantisBT
 
             userName = login.UserName;
             password = login.Password;
-            
+            rememberCredentials = login.Remember;
+
           }
-           
-
-          MantisConnectPortTypeClient mantisConnect = new MantisConnectPortTypeClient();
-          mantisConnect.Endpoint.Address= new EndpointAddress(Output.Url + "/api/soap/mantisconnect.php");
       
-
           try
           {
             // TODO
@@ -234,12 +251,13 @@ namespace BS.Output.MantisBT
             {
               WebHelper.OpenUrl(Output.Url + "/view.php?id=" + strIssueID);
             }
+                    
 
             return new V3.SendResult(V3.Result.Success, 
                                      new Output(Output.Name, 
                                                 Output.Url,
-                                                userName,
-                                                password,
+                                                (rememberCredentials) ? userName : Output.UserName,
+                                                (rememberCredentials) ? password : Output.Password,
                                                 Output.FileName,
                                                 Output.FileExtention,
                                                 Output.OpenIssueInBrowser, 
@@ -256,9 +274,10 @@ namespace BS.Output.MantisBT
           {
             return new V3.SendResult(V3.Result.Failed, ex.Message);
           }
-          catch
+          catch (Exception ex)
           {
             // Login failed
+            showLogin = true;
           }
 
         }

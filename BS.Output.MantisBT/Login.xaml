@@ -12,7 +12,7 @@
         SizeToContent="Height">
 
   <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
-    <Label x:Name="Url" Margin="4" Content="" />
+    <Label x:Name="UrlLabel" Margin="4" Content="" />
      <Grid Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
@@ -28,6 +28,13 @@
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Password</Label>
       <PasswordBox x:Name="PasswordBox" Grid.Column="1" VerticalContentAlignment="Center" />
+    </Grid>
+    <Grid Margin="4">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <CheckBox x:Name="RememberCheckBox" Content="Remember" Grid.Column="1" />
     </Grid>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
       <Button Width="80" Height="24" Content="OK" Margin="4" Click="OK_Click" />
