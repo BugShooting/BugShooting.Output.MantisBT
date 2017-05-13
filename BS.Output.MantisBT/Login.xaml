@@ -1,9 +1,8 @@
-﻿<Window x:Class="BS.Output.MantisBT.Credentials"
+﻿<Window x:Class="BS.Output.MantisBT.Login"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:local="clr-namespace:BS.Output.MantisBT"
         x:ClassModifier="internal"
         mc:Ignorable="d" 
         Title="Login"
@@ -13,6 +12,7 @@
         SizeToContent="Height">
 
   <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
+    <Label x:Name="Url" Margin="4" Content="" />
      <Grid Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>

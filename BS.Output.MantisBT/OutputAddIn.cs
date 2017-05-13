@@ -137,14 +137,14 @@ namespace BS.Output.MantisBT
           if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
           {
 
-            Credentials credentials = new Credentials(userName, password);
-            if (credentials.ShowDialog() != true)
+            Login login = new Login(Output.Url, userName, password);
+            if (login.ShowDialog() != true)
             {
               return new V3.SendResult(V3.Result.Canceled);
             }
 
-            userName = credentials.UserName;
-            password = credentials.Password;
+            userName = login.UserName;
+            password = login.Password;
             
           }
            

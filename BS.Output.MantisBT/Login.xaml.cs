@@ -15,12 +15,13 @@ using System.Windows.Shapes;
 
 namespace BS.Output.MantisBT
 {
-  partial class Credentials : Window
+  partial class Login : Window
   {
-    public Credentials(string userName, string password)
+    public Login(string url, string userName, string password)
     {
       InitializeComponent();
 
+      Url.Content = url;
       UserTextBox.Text = userName;
       PasswordBox.Password = password;
      

@@ -60,8 +60,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Credentials.xaml.cs">
-      <DependentUpon>Credentials.xaml</DependentUpon>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditOutput.xaml.cs">
       <DependentUpon>EditOutput.xaml</DependentUpon>
@@ -129,7 +129,7 @@
     <None Include="Resources\mantisbt_16x16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Credentials.xaml">
+    <Page Include="Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
