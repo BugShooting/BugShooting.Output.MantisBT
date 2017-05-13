@@ -266,18 +266,10 @@ namespace BS.Output.MantisBT
                                                 Convert.ToInt32(strIssueID)));
 
           }
-          catch (System.Net.WebException ex)
-          {
-            return new V3.SendResult(V3.Result.Failed, ex.Message);
-          }
-          catch (System.Web.Services.Protocols.SoapException ex)
-          {
-            return new V3.SendResult(V3.Result.Failed, ex.Message);
-          }
-          catch (Exception ex)
+          catch (FaultException ex) when (ex.Reason.ToString() == "Access denied")
           {
             // Login failed
-            showLogin = true;
+            showLogin = true;            
           }
 
         }

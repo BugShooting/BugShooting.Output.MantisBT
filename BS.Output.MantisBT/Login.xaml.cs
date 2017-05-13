@@ -18,6 +18,11 @@ namespace BS.Output.MantisBT
   partial class Login : Window
   {
 
+    public Login()
+    {
+      InitializeComponent();
+    }
+
     public string Url
     {
       set { UrlLabel.Content = value; }
