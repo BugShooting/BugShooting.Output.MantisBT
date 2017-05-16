@@ -13,7 +13,7 @@
 
   <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
     <TextBlock x:Name="UrlLabel" Margin="4" TextWrapping="Wrap" />
-    <Separator/>
+    <Separator Margin="4" />
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
