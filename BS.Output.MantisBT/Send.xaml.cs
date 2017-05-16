@@ -8,9 +8,19 @@ namespace BS.Output.MantisBT
   partial class Send : Window
   {
 
+    public Send()
+    {
+      InitializeComponent();
+
+      NewIssue.Checked += NewIssue_CheckedChanged;
+      NewIssue.Unchecked += NewIssue_CheckedChanged;
+      NewIssue_CheckedChanged(null, EventArgs.Empty);
+
+    }
+
     public string Url
     {
-      set { UrlLabel.Content = value; }
+      set { UrlLabel.Text = value; }
     }
 
     public int IssueID
@@ -50,7 +60,7 @@ namespace BS.Output.MantisBT
       e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
     }
 
-    private void NewIssue_Checked(object sender, RoutedEventArgs e)
+    private void NewIssue_CheckedChanged(object sender, EventArgs e)
     {
 
       ProjectControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible: Visibility.Collapsed;

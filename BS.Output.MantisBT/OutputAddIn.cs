@@ -172,6 +172,16 @@ namespace BS.Output.MantisBT
       
           try
           {
+
+            Send send = new Send();
+            send.Url = Output.Url;
+            send.IssueID = Output.LastIssueID;
+
+            if (!send.ShowDialog() == true)
+            {
+              return new V3.SendResult(V3.Result.Canceled);
+            }
+
             // TODO
             //object[] objArgs = new object[6];
             //objArgs(0) = objOutput;

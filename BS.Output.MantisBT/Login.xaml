@@ -12,8 +12,9 @@
         SizeToContent="Height">
 
   <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
-    <Label x:Name="UrlLabel" Margin="4" Content="" />
-     <Grid Margin="4">
+    <TextBlock x:Name="UrlLabel" Margin="4" TextWrapping="Wrap" />
+    <Separator/>
+    <Grid Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>

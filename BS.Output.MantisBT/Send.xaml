@@ -12,8 +12,9 @@
         SizeToContent="Height">
 
   <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
-    <Label x:Name="UrlLabel" Margin="4" Content="" />
-    <RadioButton x:Name="NewIssue" Content="New issue" Margin="4" IsChecked="True" Checked="NewIssue_Checked" />
+    <TextBlock x:Name="UrlLabel" Margin="4" TextWrapping="Wrap" />
+    <Separator/>
+    <RadioButton x:Name="NewIssue" Content="New issue" Margin="4" IsChecked="True" />
     <RadioButton Content="Attach to issue" Margin="4" />
     <Grid Margin="4" x:Name="ProjectControls">
       <Grid.ColumnDefinitions>
