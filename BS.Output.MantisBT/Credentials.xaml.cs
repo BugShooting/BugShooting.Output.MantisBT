@@ -15,35 +15,32 @@ using System.Windows.Shapes;
 
 namespace BS.Output.MantisBT
 {
-  partial class Login : Window
+  partial class Credentials : Window
   {
 
-    public Login()
+    public Credentials(string url, string userName, string password, bool remember)
     {
       InitializeComponent();
-    }
 
-    public string Url
-    {
-      set { UrlLabel.Text = value; }
+      UserTextBox.Text = userName;
+      PasswordBox.Password = password;
+      RememberCheckBox.IsChecked = remember;
+
     }
 
     public string UserName
     {
       get { return UserTextBox.Text; }
-      set { UserTextBox.Text = value; }
     }
 
     public string Password
     {
       get { return PasswordBox.Password; }
-      set { PasswordBox.Password = value; }
     }
 
     public bool Remember
     {
       get { return RememberCheckBox.IsChecked.Value; }
-      set { RememberCheckBox.IsChecked = value; }
     }
 
     private void OK_Click(object sender, RoutedEventArgs e)

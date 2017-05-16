@@ -15,7 +15,7 @@ namespace BS.Output.MantisBT
     bool openIssueInBrowser;
     string lastProjectID;
     string lastCategory;
-    int lastIssueID;
+    string lastIssueID;
 
     public Output(string name, 
                   string url, 
@@ -26,7 +26,7 @@ namespace BS.Output.MantisBT
                   bool openIssueInBrowser, 
                   string lastProjectID, 
                   string lastCategory,
-                  int lastIssueID)
+                  string lastIssueID)
     {
       this.name = name;
       this.url = url;
@@ -90,7 +90,7 @@ namespace BS.Output.MantisBT
       get { return lastCategory; }
     }
 
-    public Int32 LastIssueID
+    public string LastIssueID
     {
       get { return lastIssueID; }
     }
