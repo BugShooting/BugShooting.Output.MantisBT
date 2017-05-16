@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace BS.Output.MantisBT
 {
-  partial class EditOutput : Window
+  partial class Edit : Window
   {
-    public EditOutput(Output output)
+    public Edit(Output output)
     {
       InitializeComponent();
 

@@ -63,8 +63,8 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditOutput.xaml.cs">
-      <DependentUpon>EditOutput.xaml</DependentUpon>
+    <Compile Include="Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Output.cs" />
     <Compile Include="OutputAddIn.cs" />
@@ -73,6 +73,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Send.xaml.cs">
+      <DependentUpon>Send.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -129,11 +132,15 @@
     <None Include="Resources\mantisbt_16x16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Send.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EditOutput.xaml">
+    <Page Include="Edit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -61,20 +61,20 @@ namespace BS.Output.MantisBT
     protected override Output EditOutput(IWin32Window Owner, Output Output)
     {
 
-      EditOutput editOutput = new EditOutput(Output);
+      Edit edit = new Edit(Output);
 
-      var ownerHelper = new System.Windows.Interop.WindowInteropHelper(editOutput);
+      var ownerHelper = new System.Windows.Interop.WindowInteropHelper(edit);
       ownerHelper.Owner = Owner.Handle;
       
-      if (editOutput.ShowDialog() == true) {
+      if (edit.ShowDialog() == true) {
 
-        return new Output(editOutput.OutputName,
-                          editOutput.Url,
-                          editOutput.UserName,
-                          editOutput.Password,
-                          editOutput.FileName,
-                          editOutput.FileExtention,
-                          editOutput.OpenItemInBrowser,
+        return new Output(edit.OutputName,
+                          edit.Url,
+                          edit.UserName,
+                          edit.Password,
+                          edit.FileName,
+                          edit.FileExtention,
+                          edit.OpenItemInBrowser,
                           Output.LastProjectID,
                           Output.LastCategory,
                           Output.LastIssueID);
