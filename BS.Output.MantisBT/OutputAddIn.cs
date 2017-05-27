@@ -22,12 +22,12 @@ namespace BS.Output.MantisBT
 
     protected override Image Image64x32
     {
-      get  { return Properties.Resources.mantisbt_64x32; }
+      get  { return Properties.Resources.logo_64x32; }
     }
 
     protected override Image Image16x16
     {
-      get { return Properties.Resources.mantisbt_16x16 ; }
+      get { return Properties.Resources.logo_16x16 ; }
     }
 
     protected override bool Editable

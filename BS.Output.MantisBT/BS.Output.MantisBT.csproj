@@ -32,8 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BS.Output">
-      <HintPath>..\..\..\..\..\Output\Bin\BS.Output.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>O:\Bin\BS.Output.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -126,10 +125,10 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MantisConnect_2_4_0\mantisconnect.wsdl" />
-    <None Include="Resources\mantisbt_64x32.png" />
+    <None Include="Resources\logo_64x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\mantisbt_16x16.png" />
+    <None Include="Resources\logo_16x16.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Send.xaml">
