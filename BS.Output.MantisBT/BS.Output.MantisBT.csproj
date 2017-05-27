@@ -85,7 +85,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Connected Services\MantisConnect_2_4_0\BS.Output.MantisBT.MantisConnect_2_4_0.AccountData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
