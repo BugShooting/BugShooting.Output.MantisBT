@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.ServiceModel;
 using System.Web;
+using System.Threading.Tasks;
 using BS.Output.MantisBT.MantisConnect_2_4_0;
 
 namespace BS.Output.MantisBT
@@ -122,12 +123,12 @@ namespace BS.Output.MantisBT
 
     }
 
-    protected override V3.SendResult SendAsync(Output Output, V3.ImageData ImageData)
+    protected override async Task<V3.SendResult> Send(Output Output, V3.ImageData ImageData)
     {
 
       try
       {
-               
+
         HttpBindingBase binding;
         if (Output.Url.StartsWith("https", StringComparison.InvariantCultureIgnoreCase))
         {
@@ -171,7 +172,7 @@ namespace BS.Output.MantisBT
           {
 
             // Get available projects
-            ProjectData[] projects = mantisConnect.mc_projects_get_user_accessible(userName, password);
+            ProjectData[] projects = await Task.Factory.StartNew(() => mantisConnect.mc_projects_get_user_accessible(userName, password));
 
             // Show send window
             Send send = new Send(Output.Url, Output.LastProjectID, Output.LastCategory, Output.LastIssueID, projects, userName, password);
@@ -189,8 +190,8 @@ namespace BS.Output.MantisBT
 
             if (send.CreateNewIssue)
             {
-              ObjectRef[] priorities = mantisConnect.mc_enum_priorities(userName, password);
-              ObjectRef[] severities = mantisConnect.mc_enum_severities(userName, password);
+              ObjectRef[] priorities = await Task.Factory.StartNew(() => mantisConnect.mc_enum_priorities(userName, password));
+              ObjectRef[] severities = await Task.Factory.StartNew(() => mantisConnect.mc_enum_severities(userName, password));
 
               ObjectRef projectRef = new ObjectRef();
               projectRef.id = send.ProjectID;
@@ -211,7 +212,7 @@ namespace BS.Output.MantisBT
               issue.eta = new ObjectRef();
               issue.view_state = new ObjectRef();
 
-              issueID = mantisConnect.mc_issue_add(userName, password, issue);
+              issueID = await Task.Factory.StartNew(() => mantisConnect.mc_issue_add(userName, password, issue));
 
               projectID = send.ProjectID;
               category = send.Category;
@@ -231,13 +232,13 @@ namespace BS.Output.MantisBT
                 objNote.date_submitted = DateTime.UtcNow;
                 objNote.view_state = new ObjectRef();
 
-                mantisConnect.mc_issue_note_add(userName, password, issueID, objNote);
+                await Task.Factory.StartNew(() => mantisConnect.mc_issue_note_add(userName, password, issueID, objNote));
 
               }
 
             }
 
-            mantisConnect.mc_issue_attachment_add(userName, password, issueID, fileData.FullFileName, fileData.MimeType, fileData.FileBytes);
+            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fileData.FullFileName, fileData.MimeType, fileData.FileBytes));
 
 
             // Open issue in browser
@@ -275,6 +276,6 @@ namespace BS.Output.MantisBT
       }
 
     }
-
+      
   }
 }
