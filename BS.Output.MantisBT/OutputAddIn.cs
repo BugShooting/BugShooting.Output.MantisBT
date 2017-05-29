@@ -11,11 +11,6 @@ namespace BS.Output.MantisBT
   public class OutputAddIn: V3.OutputAddIn<Output>
   {
 
-    protected override Guid ID
-    {
-      get  { return new Guid("1A5A1DA0-D629-43F3-943B-C93CAAF4549F"); }
-    }
-
     protected override string Name
     {
       get { return "MantisBT"; }
