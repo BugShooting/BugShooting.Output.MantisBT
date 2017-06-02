@@ -164,6 +164,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)NuGet\nuget.exe" pack "$(SolutionDir)NuGet\$(ProjectName).nuspec"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)NuGet\nuget.exe" pack "$(SolutionDir)NuGet\$(ProjectName).nuspec" -BasePath "$(ProjectDir)bin\$(ConfigurationName)" -OutputDirectory "$(ProjectDir)bin\$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
