@@ -15,6 +15,6 @@
 			<tags>bugshooting.com/api/v3</tags>
     </metadata>
     <files>
-			<file src="BS.Output.MantisBT.dll" target="lib" />
+			<file src="BS.Output.MantisBT.dll" />
     </files>
 </package>
