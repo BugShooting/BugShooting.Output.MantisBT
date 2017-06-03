@@ -12,7 +12,7 @@
 			<releaseNotes />
 			<description>Attach screenshots to Mantis BT Issues.</description>
 			<copyright />
-			<tags>bugshooting.com/api/v3</tags>
+			<tags>bugshooting.com/output/v3</tags>
     </metadata>
     <files>
 			<file src="BS.Output.MantisBT.dll" />
