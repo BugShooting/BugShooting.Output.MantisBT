@@ -6,7 +6,7 @@
 			<title>MantisBT Output for Bug Shooting</title>
       <authors>Bug Shooting, Alexej Hirsch</authors>
       <owners>Bug Shooting, Alexej Hirsch</owners>
-      <licenseUrl>https://github.com/BugShooting/Output.MantisBT/blob/master/LICENSE.txt</licenseUrl>
+      <licenseUrl>https://github.com/BugShooting/Output.MantisBT/raw/master/LICENSE.txt</licenseUrl>
 			<projectUrl>http://www.bugshooting.com/</projectUrl>
 			<iconUrl>https://github.com/BugShooting/Output.MantisBT/blob/master/BS.Output.MantisBT/Resources/logo_64x32.png</iconUrl>
 			<requireLicenseAcceptance>false</requireLicenseAcceptance>
