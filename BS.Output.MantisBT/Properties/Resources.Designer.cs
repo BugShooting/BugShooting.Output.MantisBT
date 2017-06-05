@@ -63,9 +63,9 @@ namespace BS.Output.MantisBT.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logo_16x16 {
+        internal static System.Drawing.Bitmap logo_16 {
             get {
-                object obj = ResourceManager.GetObject("logo_16x16", resourceCulture);
+                object obj = ResourceManager.GetObject("logo_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace BS.Output.MantisBT.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logo_64x32 {
+        internal static System.Drawing.Bitmap logo_64 {
             get {
-                object obj = ResourceManager.GetObject("logo_64x32", resourceCulture);
+                object obj = ResourceManager.GetObject("logo_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

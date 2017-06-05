@@ -16,14 +16,14 @@ namespace BS.Output.MantisBT
       get { return "MantisBT"; }
     }
 
-    protected override Image Image64x32
+    protected override Image Image64
     {
-      get  { return Properties.Resources.logo_64x32; }
+      get  { return Properties.Resources.logo_64; }
     }
 
-    protected override Image Image16x16
+    protected override Image Image16
     {
-      get { return Properties.Resources.logo_16x16 ; }
+      get { return Properties.Resources.logo_16 ; }
     }
 
     protected override bool Editable
