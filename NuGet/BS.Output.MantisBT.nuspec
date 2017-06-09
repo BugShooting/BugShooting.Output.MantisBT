@@ -7,7 +7,7 @@
       <authors>Bug Shooting, Alexej Hirsch</authors>
       <owners>Bug Shooting, Alexej Hirsch</owners>
       <licenseUrl>https://github.com/BugShooting/Output.MantisBT/raw/master/LICENSE.txt</licenseUrl>
-			<projectUrl>http://www.bugshooting.com/</projectUrl>
+			<projectUrl>https://github.com/BugShooting</projectUrl>
 			<iconUrl>https://github.com/BugShooting/Output.MantisBT/raw/master/BS.Output.MantisBT/Resources/logo_64.png</iconUrl>
 			<requireLicenseAcceptance>false</requireLicenseAcceptance>
 			<releaseNotes />
