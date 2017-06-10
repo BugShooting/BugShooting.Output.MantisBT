@@ -176,9 +176,7 @@ namespace BS.Output.MantisBT
             {
               return new V3.SendResult(V3.Result.Canceled);
             }
-
-            V3.FileData fileData = V3.FileHelper.GetFileData(Output.FileName, Output.FileFormat, ImageData);
-                        
+       
             string projectID = null;
             string category = null;
             string issueID = null;
@@ -233,7 +231,11 @@ namespace BS.Output.MantisBT
 
             }
 
-            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fileData.FullFileName, fileData.MimeType, fileData.FileBytes));
+            string fileName = V3.FileHelper.GetFileName(Output.FileName, Output.FileFormat, ImageData);
+            string mimeType = V3.FileHelper.GetMimeType(Output.FileFormat);
+            byte[] fileBytes = V3.FileHelper.GetFileBytes(Output.FileFormat, ImageData);
+
+            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fileName, mimeType, fileBytes));
 
 
             // Open issue in browser
