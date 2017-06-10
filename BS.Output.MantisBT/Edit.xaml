@@ -57,7 +57,7 @@
           <ContextMenu x:Name="FileNameReplacementList" />
         </Button.ContextMenu>
       </Button>
-      <ComboBox x:Name="FileExtentionList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" />
+      <ComboBox x:Name="FileFormatList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>

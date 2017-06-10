@@ -29,12 +29,12 @@ namespace BS.Output.MantisBT
         FileNameReplacementList.Items.Add(item);
       }
 
-      foreach (string fileExtention in V3.FileHelper.GetFileExtentions())
+      foreach (string fileFormat in V3.FileHelper.GetFileFormats())
       {
         ComboBoxItem item = new ComboBoxItem();
-        item.Content = "." + fileExtention;
-        item.Tag = fileExtention;
-        FileExtentionList.Items.Add(item);
+        item.Content = fileFormat;
+        item.Tag = fileFormat;
+        FileFormatList.Items.Add(item);
       }
 
       NameTextBox.Text = output.Name;
@@ -42,7 +42,7 @@ namespace BS.Output.MantisBT
       UserTextBox.Text = output.UserName;
       PasswordBox.Password = output.Password;
       FileNameTextBox.Text = output.FileName;
-      FileExtentionList.SelectedValue = output.FileExtention;
+      FileFormatList.SelectedValue = output.FileFormat;
       OpenItemInBrowserCheckBox.IsChecked = output.OpenIssueInBrowser;
 
     }
@@ -72,9 +72,9 @@ namespace BS.Output.MantisBT
       get { return FileNameTextBox.Text; }
     }
 
-    public string FileExtention
+    public string FileFormat
     {
-      get { return FileExtentionList.SelectedValue.ToString(); }
+      get { return FileFormatList.SelectedValue.ToString(); }
     }
 
     public bool OpenItemInBrowser

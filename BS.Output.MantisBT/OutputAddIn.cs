@@ -69,7 +69,7 @@ namespace BS.Output.MantisBT
                           edit.UserName,
                           edit.Password,
                           edit.FileName,
-                          edit.FileExtention,
+                          edit.FileFormat,
                           edit.OpenItemInBrowser,
                           Output.LastProjectID,
                           Output.LastCategory,
@@ -93,7 +93,7 @@ namespace BS.Output.MantisBT
       outputValues.Add(new OutputValue("Password",Output.Password, true));
       outputValues.Add(new OutputValue("OpenIssueInBrowser", Convert.ToString(Output.OpenIssueInBrowser)));
       outputValues.Add(new OutputValue("FileName", Output.FileName));
-      outputValues.Add(new OutputValue("FileExtention", Output.FileExtention));
+      outputValues.Add(new OutputValue("FileFormat", Output.FileFormat));
       outputValues.Add(new OutputValue("LastProjectID", Output.LastProjectID));
       outputValues.Add(new OutputValue("LastCategory", Output.LastCategory));
       outputValues.Add(new OutputValue("LastIssueID", Convert.ToString(Output.LastIssueID)));
@@ -110,7 +110,7 @@ namespace BS.Output.MantisBT
                         OutputValues["UserName", ""].Value,
                         OutputValues["Password", ""].Value, 
                         OutputValues["FileName", "Screenshot"].Value, 
-                        OutputValues["FileExtention", "png"].Value,
+                        OutputValues["FileFormat", ""].Value,
                         Convert.ToBoolean(OutputValues["OpenIssueInBrowser", Convert.ToString(true)].Value),
                         OutputValues["LastProjectID", string.Empty].Value, 
                         OutputValues["LastCategory", string.Empty].Value, 
@@ -177,7 +177,7 @@ namespace BS.Output.MantisBT
               return new V3.SendResult(V3.Result.Canceled);
             }
 
-            V3.FileData fileData = V3.FileHelper.GetFileData(Output.FileName, Output.FileExtention, ImageData);
+            V3.FileData fileData = V3.FileHelper.GetFileData(Output.FileName, Output.FileFormat, ImageData);
                         
             string projectID = null;
             string category = null;
@@ -239,7 +239,7 @@ namespace BS.Output.MantisBT
             // Open issue in browser
             if (Output.OpenIssueInBrowser)
             {
-              WebHelper.OpenUrl(Output.Url + "/view.php?id=" + issueID);
+              V3.WebHelper.OpenUrl(Output.Url + "/view.php?id=" + issueID);
             }
                     
 
@@ -249,7 +249,7 @@ namespace BS.Output.MantisBT
                                                 (rememberCredentials) ? userName : Output.UserName,
                                                 (rememberCredentials) ? password : Output.Password,
                                                 Output.FileName,
-                                                Output.FileExtention,
+                                                Output.FileFormat,
                                                 Output.OpenIssueInBrowser, 
                                                 projectID, 
                                                 category, 

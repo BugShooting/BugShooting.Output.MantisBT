@@ -11,7 +11,7 @@ namespace BS.Output.MantisBT
     string userName;
     string password;
     string fileName;
-    string fileExtention;
+    string fileFormat;
     bool openIssueInBrowser;
     string lastProjectID;
     string lastCategory;
@@ -22,7 +22,7 @@ namespace BS.Output.MantisBT
                   string userName,
                   string password, 
                   string fileName, 
-                  string fileExtention,
+                  string fileFormat,
                   bool openIssueInBrowser, 
                   string lastProjectID, 
                   string lastCategory,
@@ -33,7 +33,7 @@ namespace BS.Output.MantisBT
       this.userName = userName;
       this.password = password;
       this.fileName = fileName;
-      this.fileExtention = fileExtention;
+      this.fileFormat = fileFormat;
       this.openIssueInBrowser = openIssueInBrowser;
       this.lastProjectID = lastProjectID;
       this.lastCategory = lastCategory;
@@ -70,9 +70,9 @@ namespace BS.Output.MantisBT
       get { return fileName; }
     }
 
-    public string FileExtention
+    public string FileFormat
     {
-      get { return fileExtention; }
+      get { return fileFormat; }
     }
 
     public bool OpenIssueInBrowser
