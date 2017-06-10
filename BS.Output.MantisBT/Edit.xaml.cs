@@ -31,7 +31,13 @@ namespace BS.Output.MantisBT
       UserTextBox.Text = output.UserName;
       PasswordBox.Password = output.Password;
       FileNameTextBox.Text = output.FileName;
+
       FileFormatList.SelectedValue = output.FileFormat;
+      if (FileFormatList.SelectedValue is null)
+      {
+        FileFormatList.SelectedIndex = 0;
+      }
+
       OpenItemInBrowserCheckBox.IsChecked = output.OpenIssueInBrowser;
 
     }
