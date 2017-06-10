@@ -44,7 +44,7 @@ namespace BS.Output.MantisBT
                                  String.Empty, 
                                  String.Empty, 
                                  "Screenshot",
-                                 "png", 
+                                 String.Empty, 
                                  true,
                                  String.Empty,
                                  String.Empty, 
