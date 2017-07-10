@@ -118,11 +118,15 @@ namespace BS.Output.MantisBT
 
     }
 
-    protected override async Task<V3.SendResult> Send(Output Output, V3.ImageData ImageData)
+    protected override async Task<V3.SendResult> Send(IWin32Window Owner, Output Output, V3.ImageData ImageData)
     {
 
       try
       {
+
+        TODO
+          - Owner verwenden
+          - Dateinnamen in Send eingeben
 
         HttpBindingBase binding;
         if (Output.Url.StartsWith("https", StringComparison.InvariantCultureIgnoreCase))
