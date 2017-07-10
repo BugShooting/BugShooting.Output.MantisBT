@@ -124,10 +124,6 @@ namespace BS.Output.MantisBT
       try
       {
 
-        TODO
-          - Owner verwenden
-          - Dateinnamen in Send eingeben
-
         HttpBindingBase binding;
         if (Output.Url.StartsWith("https", StringComparison.InvariantCultureIgnoreCase))
         {
@@ -147,6 +143,8 @@ namespace BS.Output.MantisBT
         bool showLogin = string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password);
         bool rememberCredentials = false;
 
+        string fileName = V3.FileHelper.GetFileName(Output.FileName, Output.FileFormat, ImageData);
+
         while (true)
         {
          
@@ -155,6 +153,9 @@ namespace BS.Output.MantisBT
 
             // Show credentials window
             Credentials credentials = new Credentials(Output.Url, userName, password, rememberCredentials);
+
+            var ownerHelper = new System.Windows.Interop.WindowInteropHelper(credentials);
+            ownerHelper.Owner = Owner.Handle;
 
             if (credentials.ShowDialog() != true)
             {
@@ -174,13 +175,16 @@ namespace BS.Output.MantisBT
             ProjectData[] projects = await Task.Factory.StartNew(() => mantisConnect.mc_projects_get_user_accessible(userName, password));
 
             // Show send window
-            Send send = new Send(Output.Url, Output.LastProjectID, Output.LastCategory, Output.LastIssueID, projects, userName, password);
+            Send send = new Send(Output.Url, Output.LastProjectID, Output.LastCategory, Output.LastIssueID, projects, userName, password, fileName);
+
+            var ownerHelper = new System.Windows.Interop.WindowInteropHelper(send);
+            ownerHelper.Owner = Owner.Handle;
 
             if (!send.ShowDialog() == true)
             {
               return new V3.SendResult(V3.Result.Canceled);
             }
-       
+            
             string projectID = null;
             string category = null;
             string issueID = null;
@@ -235,7 +239,8 @@ namespace BS.Output.MantisBT
 
             }
 
-            string fileName = V3.FileHelper.GetFileName(Output.FileName, Output.FileFormat, ImageData);
+            fileName = send.FileName;
+            
             string mimeType = V3.FileHelper.GetMimeType(Output.FileFormat);
             byte[] fileBytes = V3.FileHelper.GetFileBytes(Output.FileFormat, ImageData);
 

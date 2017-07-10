@@ -10,7 +10,7 @@ namespace BS.Output.MantisBT
   partial class Send : Window
   {
 
-    public Send(string url, string lastProjectID, string lastCategory, string lastIssueID, ProjectData[] projects, string userName, string password)
+    public Send(string url, string lastProjectID, string lastCategory, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
     {
       InitializeComponent();
       
@@ -27,6 +27,7 @@ namespace BS.Output.MantisBT
       Projects.SelectedValue = lastProjectID;
       Categories.SelectedValue = lastCategory;
       IssueIDTextBox.Text = lastIssueID;
+      FileNameTextBox.Text = fileName;
 
     }
 
@@ -70,6 +71,12 @@ namespace BS.Output.MantisBT
     {
       get { return NoteTextBox.Text; }
     }
+
+    public string FileName
+    {
+      get { return FileNameTextBox.Text; }
+    }
+
 
     private void OK_Click(object sender, RoutedEventArgs e)
     {

@@ -64,6 +64,14 @@
       <Label Grid.Column="0">Note</Label>
       <TextBox x:Name="NoteTextBox" Grid.Column="1" MaxLines="5" MinLines="5" ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </Grid>
+    <Grid Margin="4">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Label Grid.Column="0">File name</Label>
+      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" />
+    </Grid>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
       <Button Width="80" Height="24" Content="OK" Margin="4" Click="OK_Click" />
       <Button Width="80" Height="24" Content="Cancel" Margin="4" Click="Cancel_Click" />
