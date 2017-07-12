@@ -10,7 +10,7 @@ namespace BS.Output.MantisBT
   partial class Send : Window
   {
 
-    public Send(string url, string lastProjectID, string lastCategory, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
+    public Send(string url, string lastProjectID, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
     {
       InitializeComponent();
       
@@ -25,10 +25,10 @@ namespace BS.Output.MantisBT
 
       Projects.ItemsSource = projectItems;
       Projects.SelectedValue = lastProjectID;
-      Categories.SelectedValue = lastCategory;
       IssueIDTextBox.Text = lastIssueID;
       FileNameTextBox.Text = fileName;
 
+      SummaryTextBox.Focus();
     }
 
     public bool CreateNewIssue
@@ -46,11 +46,6 @@ namespace BS.Output.MantisBT
       get { return Projects.SelectedValue.ToString(); }
     }
 
-    public string Category
-    {
-      get { return Categories.SelectedValue.ToString(); }
-    }
-
     public string Summary
     {
       get { return SummaryTextBox.Text; }
@@ -65,11 +60,6 @@ namespace BS.Output.MantisBT
     public string IssueID
     {
       get { return IssueIDTextBox.Text; }
-    }
-
-    public string Note
-    {
-      get { return NoteTextBox.Text; }
     }
 
     public string FileName
@@ -111,14 +101,10 @@ namespace BS.Output.MantisBT
 
     private void NewIssue_CheckedChanged(object sender, EventArgs e)
     {
-
       ProjectControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible: Visibility.Collapsed;
-      CategoryControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
       SummaryControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
       DescriptionControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
       IssueIDControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Collapsed : Visibility.Visible;
-      NoteControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Collapsed : Visibility.Visible;
-    
     }
 
     private void InitProjects(List<ProjectItem> projectItems, ProjectData[] projects, string parentProjectName)
@@ -147,7 +133,13 @@ namespace BS.Output.MantisBT
       }
 
     }
-
+    
+    private void AttachToIssue_Checked(object sender, RoutedEventArgs e)
+    {
+      IssueIDTextBox.SelectAll();
+      IssueIDTextBox.Focus();
+    }
+      
   }
 
   internal class ProjectItem

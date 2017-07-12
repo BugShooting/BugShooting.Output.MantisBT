@@ -14,7 +14,6 @@ namespace BS.Output.MantisBT
     string fileFormat;
     bool openIssueInBrowser;
     string lastProjectID;
-    string lastCategory;
     string lastIssueID;
 
     public Output(string name, 
@@ -25,7 +24,6 @@ namespace BS.Output.MantisBT
                   string fileFormat,
                   bool openIssueInBrowser, 
                   string lastProjectID, 
-                  string lastCategory,
                   string lastIssueID)
     {
       this.name = name;
@@ -36,7 +34,6 @@ namespace BS.Output.MantisBT
       this.fileFormat = fileFormat;
       this.openIssueInBrowser = openIssueInBrowser;
       this.lastProjectID = lastProjectID;
-      this.lastCategory = lastCategory;
       this.lastIssueID = lastIssueID;
     }
     
@@ -83,11 +80,6 @@ namespace BS.Output.MantisBT
     public string LastProjectID
     {
       get { return lastProjectID; }
-    }
-
-    public string LastCategory
-    {
-      get { return lastCategory; }
     }
 
     public string LastIssueID

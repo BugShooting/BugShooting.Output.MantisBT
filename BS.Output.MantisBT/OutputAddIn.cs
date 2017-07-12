@@ -47,7 +47,6 @@ namespace BS.Output.MantisBT
                                  String.Empty, 
                                  true,
                                  String.Empty,
-                                 String.Empty, 
                                  "1");
 
       return EditOutput(Owner, output);
@@ -72,7 +71,6 @@ namespace BS.Output.MantisBT
                           edit.FileFormat,
                           edit.OpenItemInBrowser,
                           Output.LastProjectID,
-                          Output.LastCategory,
                           Output.LastIssueID);
       }
       else
@@ -95,7 +93,6 @@ namespace BS.Output.MantisBT
       outputValues.Add(new OutputValue("FileName", Output.FileName));
       outputValues.Add(new OutputValue("FileFormat", Output.FileFormat));
       outputValues.Add(new OutputValue("LastProjectID", Output.LastProjectID));
-      outputValues.Add(new OutputValue("LastCategory", Output.LastCategory));
       outputValues.Add(new OutputValue("LastIssueID", Convert.ToString(Output.LastIssueID)));
 
       return outputValues;
@@ -113,7 +110,6 @@ namespace BS.Output.MantisBT
                         OutputValues["FileFormat", ""].Value,
                         Convert.ToBoolean(OutputValues["OpenIssueInBrowser", Convert.ToString(true)].Value),
                         OutputValues["LastProjectID", string.Empty].Value, 
-                        OutputValues["LastCategory", string.Empty].Value, 
                         OutputValues["LastIssueID", "1"].Value);
 
     }
@@ -175,7 +171,7 @@ namespace BS.Output.MantisBT
             ProjectData[] projects = await Task.Factory.StartNew(() => mantisConnect.mc_projects_get_user_accessible(userName, password));
 
             // Show send window
-            Send send = new Send(Output.Url, Output.LastProjectID, Output.LastCategory, Output.LastIssueID, projects, userName, password, fileName);
+            Send send = new Send(Output.Url, Output.LastProjectID, Output.LastIssueID, projects, userName, password, fileName);
 
             var ownerHelper = new System.Windows.Interop.WindowInteropHelper(send);
             ownerHelper.Owner = Owner.Handle;
@@ -186,13 +182,16 @@ namespace BS.Output.MantisBT
             }
             
             string projectID = null;
-            string category = null;
             string issueID = null;
 
             if (send.CreateNewIssue)
             {
+
+              projectID = send.ProjectID;
+
               ObjectRef[] priorities = await Task.Factory.StartNew(() => mantisConnect.mc_enum_priorities(userName, password));
               ObjectRef[] severities = await Task.Factory.StartNew(() => mantisConnect.mc_enum_severities(userName, password));
+              string[] categories = await Task.Factory.StartNew(() => mantisConnect.mc_project_get_categories(userName, password, projectID));
 
               ObjectRef projectRef = new ObjectRef();
               projectRef.id = send.ProjectID;
@@ -205,7 +204,7 @@ namespace BS.Output.MantisBT
               issue.severity = severities[0];
               issue.status = new ObjectRef();
               issue.date_submitted = DateTime.UtcNow;
-              issue.category = send.Category;
+              issue.category = categories[0];
               issue.reproducibility = new ObjectRef();
               issue.resolution = new ObjectRef();
               issue.project = projectRef;
@@ -215,36 +214,19 @@ namespace BS.Output.MantisBT
 
               issueID = await Task.Factory.StartNew(() => mantisConnect.mc_issue_add(userName, password, issue));
 
-              projectID = send.ProjectID;
-              category = send.Category;
-
             }
             else
             {
               issueID = Convert.ToString(send.IssueID);
               projectID = Output.LastProjectID;
-              category = Output.LastCategory;
-
-
-              if (!string.IsNullOrEmpty(send.Note))
-              {
-                IssueNoteData objNote = new IssueNoteData();
-                objNote.text = HttpUtility.HtmlEncode(send.Note);
-                objNote.date_submitted = DateTime.UtcNow;
-                objNote.view_state = new ObjectRef();
-
-                await Task.Factory.StartNew(() => mantisConnect.mc_issue_note_add(userName, password, issueID, objNote));
-
-              }
-
             }
 
-            fileName = send.FileName;
-            
+            string fullFileName = send.FileName + "." + V3.FileHelper.GetFileExtention(Output.FileFormat);
+
             string mimeType = V3.FileHelper.GetMimeType(Output.FileFormat);
             byte[] fileBytes = V3.FileHelper.GetFileBytes(Output.FileFormat, ImageData);
 
-            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fileName, mimeType, fileBytes));
+            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fullFileName, mimeType, fileBytes));
 
 
             // Open issue in browser
@@ -263,7 +245,6 @@ namespace BS.Output.MantisBT
                                                 Output.FileFormat,
                                                 Output.OpenIssueInBrowser, 
                                                 projectID, 
-                                                category, 
                                                 issueID));
 
           }

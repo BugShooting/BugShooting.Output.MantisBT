@@ -15,22 +15,14 @@
     <TextBlock x:Name="UrlLabel" Margin="4" TextWrapping="Wrap" />
     <Separator Margin="4" />
     <RadioButton x:Name="NewIssue" Content="New issue" Margin="4" IsChecked="True" />
-    <RadioButton Content="Attach to issue" Margin="4" />
+    <RadioButton x:Name="AttachToIssue" Content="Attach to issue" Margin="4" Checked="AttachToIssue_Checked" />
     <Grid Margin="4" x:Name="ProjectControls">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Project</Label>
-      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="Tag" />
-    </Grid>
-    <Grid Margin="4" x:Name="CategoryControls">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
-      <Label Grid.Column="0">Category</Label>
-      <ComboBox x:Name="Categories" Grid.Column="1" SelectedValuePath="Tag" />
+      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" />
     </Grid>
     <Grid Margin="4" x:Name="SummaryControls">
       <Grid.ColumnDefinitions>
@@ -46,7 +38,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Description</Label>
-      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" MaxLines="5" MinLines="5" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </Grid>
     <Grid Margin="4" x:Name="IssueIDControls">
       <Grid.ColumnDefinitions>
@@ -55,14 +47,6 @@
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Issue ID</Label>
       <TextBox x:Name="IssueIDTextBox" Grid.Column="1" VerticalContentAlignment="Center" PreviewTextInput="IssueID_PreviewTextInput" />
-    </Grid>
-    <Grid Margin="4" x:Name="NoteControls">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
-      <Label Grid.Column="0">Note</Label>
-      <TextBox x:Name="NoteTextBox" Grid.Column="1" MaxLines="5" MinLines="5" ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
