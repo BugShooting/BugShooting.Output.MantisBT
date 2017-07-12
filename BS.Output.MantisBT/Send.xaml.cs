@@ -10,6 +10,8 @@ namespace BS.Output.MantisBT
   partial class Send : Window
   {
 
+   // TODO: Data Validieren: Project, Summary, Description, IssueID, Filename
+
     public Send(string url, string lastProjectID, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
     {
       InitializeComponent();
@@ -29,6 +31,7 @@ namespace BS.Output.MantisBT
       FileNameTextBox.Text = fileName;
 
       SummaryTextBox.Focus();
+      
     }
 
     public bool CreateNewIssue
@@ -139,7 +142,7 @@ namespace BS.Output.MantisBT
       IssueIDTextBox.SelectAll();
       IssueIDTextBox.Focus();
     }
-      
+        
   }
 
   internal class ProjectItem
