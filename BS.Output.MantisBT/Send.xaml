@@ -23,7 +23,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Project</Label>
-      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" >
+      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" SelectionChanged="ValidateData" >
         <ComboBox.SelectedValue>
           <Binding Path="ProjectID" UpdateSourceTrigger="PropertyChanged">
             <Binding.ValidationRules>
@@ -39,7 +39,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Summary</Label>
-      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" >
+      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="ValidateData" >
         <Binding Path="Summary" UpdateSourceTrigger="PropertyChanged">
           <Binding.ValidationRules>
             <local:NotNullOrEmptyValidationRule />
@@ -53,7 +53,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Description</Label>
-      <TextBox Grid.Column="1" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" TextChanged="ValidateData" >
         <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
           <Binding.ValidationRules>
             <local:NotNullOrEmptyValidationRule />
@@ -75,10 +75,16 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
-      <TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding FileName}" />
+      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="ValidateData">
+        <Binding Path="FileName" UpdateSourceTrigger="PropertyChanged">
+          <Binding.ValidationRules>
+            <local:NotNullOrEmptyValidationRule />
+          </Binding.ValidationRules>
+        </Binding>
+      </TextBox>
     </Grid>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
-      <Button Width="80" Height="24" Content="OK" Margin="4" IsDefault="True" Click="OK_Click" />
+      <Button x:Name="OK" Width="80" Height="24" Content="OK" Margin="4" IsDefault="True" Click="OK_Click" />
       <Button Width="80" Height="24" Content="Cancel" Margin="4" IsCancel="True" />
     </StackPanel>
   </StackPanel>

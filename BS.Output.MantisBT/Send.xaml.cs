@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 using BS.Output.MantisBT.MantisConnect_2_4_0;
@@ -42,42 +43,11 @@ namespace BS.Output.MantisBT
     public string IssueID { get; set; }
   
     public string FileName { get; set; }
-   
-
-    private void OK_Click(object sender, RoutedEventArgs e)
-    {
-      this.DialogResult = true;
-    }
-
-    private void IssueID_PreviewTextInput(object sender, TextCompositionEventArgs e)
-    {
-      e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
-    }
-
-    private void NewIssue_CheckedChanged(object sender, EventArgs e)
-    {
-      ProjectControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible: Visibility.Collapsed;
-      SummaryControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
-      DescriptionControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
-      IssueIDControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Collapsed : Visibility.Visible;
-
-      if (NewIssue.IsChecked.Value)
-      {
-        SummaryTextBox.SelectAll();
-        SummaryTextBox.Focus();
-      }
-      else
-      { 
-        IssueIDTextBox.SelectAll();
-        IssueIDTextBox.Focus();
-      }
-
-    }
 
     private void InitProjects(List<ProjectItem> projectItems, ProjectData[] projects, string parentProjectName)
     {
       string fullName = null;
-      
+
       foreach (ProjectData project in projects)
       {
         if (parentProjectName == string.Empty)
@@ -99,7 +69,45 @@ namespace BS.Output.MantisBT
       }
 
     }
-  
+
+    private void NewIssue_CheckedChanged(object sender, EventArgs e)
+    {
+      ProjectControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
+      SummaryControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
+      DescriptionControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
+      IssueIDControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Collapsed : Visibility.Visible;
+
+      if (NewIssue.IsChecked.Value)
+      {
+        SummaryTextBox.SelectAll();
+        SummaryTextBox.Focus();
+      }
+      else
+      {
+        IssueIDTextBox.SelectAll();
+        IssueIDTextBox.Focus();
+      }
+
+      ValidateData(null, null);
+
+    }
+
+    private void IssueID_PreviewTextInput(object sender, TextCompositionEventArgs e)
+    {
+      e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+    }
+    
+    private void ValidateData(object sender, RoutedEventArgs e)
+    {
+      OK.IsEnabled = (!NewIssue.IsChecked.Value || (!Validation.GetHasError(Projects) && !Validation.GetHasError(SummaryTextBox) && !Validation.GetHasError(DescriptionTextBox))) && 
+                     !Validation.GetHasError(FileNameTextBox);
+    }
+
+    private void OK_Click(object sender, RoutedEventArgs e)
+    {
+      this.DialogResult = true;
+    }
+
   }
 
   internal class ProjectItem
