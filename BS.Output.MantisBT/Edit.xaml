@@ -19,7 +19,13 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Name</Label>
-      <TextBox x:Name="NameTextBox" Grid.Column="1" VerticalContentAlignment="Center" />
+      <TextBox x:Name="OutputNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="ValidateData" >
+        <Binding Path="OutputName" UpdateSourceTrigger="PropertyChanged">
+          <Binding.ValidationRules>
+            <local:NotNullOrEmptyValidationRule />
+          </Binding.ValidationRules>
+        </Binding>
+      </TextBox>
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -27,7 +33,13 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Url</Label>
-      <TextBox x:Name="UrlTextBox" Grid.Column="1" VerticalContentAlignment="Center" />
+      <TextBox x:Name="UrlTextBox" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="ValidateData" >
+        <Binding Path="Url" UpdateSourceTrigger="PropertyChanged">
+          <Binding.ValidationRules>
+            <local:NotNullOrEmptyValidationRule />
+          </Binding.ValidationRules>
+        </Binding>
+      </TextBox>
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -35,7 +47,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">User</Label>
-      <TextBox x:Name="UserTextBox" Grid.Column="1" VerticalContentAlignment="Center" />
+      <TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -51,24 +63,33 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
-      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,94,0" ContextMenuService.IsEnabled="False" />
+      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,94,0" ContextMenuService.IsEnabled="False" Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}"/>
       <Button x:Name="FileNameReplacement"  Grid.Column="1" Content="%" Width="25" HorizontalAlignment="Right" Margin="0,0,68,0" Click="FileNameReplacement_Click">
         <Button.ContextMenu>
           <ContextMenu x:Name="FileNameReplacementList" />
         </Button.ContextMenu>
       </Button>
-      <ComboBox x:Name="FileFormatList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" />
+      <ComboBox x:Name="FileFormatList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" SelectionChanged="ValidateData">
+        <ComboBox.SelectedValue>
+          <Binding Path="FileFormat" UpdateSourceTrigger="PropertyChanged">
+            <Binding.ValidationRules>
+              <local:NotNullOrEmptyValidationRule />
+            </Binding.ValidationRules>
+          </Binding>
+        </ComboBox.SelectedValue>
+      </ComboBox>
+      
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-      <CheckBox x:Name="OpenItemInBrowserCheckBox" Grid.Column="1" Content="Open item in browser after sending" />
+      <CheckBox Grid.Column="1" Content="Open item in browser after sending" IsChecked="{Binding OpenItemInBrowser, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
-      <Button Width="80" Height="24" Content="OK" Margin="4" Click="OK_Click" />
-      <Button Width="80" Height="24" Content="Cancel" Margin="4" Click="Cancel_Click" />
+      <Button x:Name="OK" Width="80" Height="24" Content="OK" Margin="4" IsDefault="True" Click="OK_Click" />
+      <Button Width="80" Height="24" Content="Cancel" Margin="4" IsCancel="True" />
     </StackPanel>
   </StackPanel>
 

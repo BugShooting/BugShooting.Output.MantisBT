@@ -148,7 +148,11 @@ namespace BS.Output.MantisBT
           {
 
             // Show credentials window
-            Credentials credentials = new Credentials(Output.Url, userName, password, rememberCredentials);
+            Credentials credentials = new Credentials();
+            credentials.Url = Output.Url;
+            credentials.UserName = userName;
+            credentials.Password = password;
+            credentials.Remember = rememberCredentials;
 
             var ownerHelper = new System.Windows.Interop.WindowInteropHelper(credentials);
             ownerHelper.Owner = Owner.Handle;
@@ -195,7 +199,6 @@ namespace BS.Output.MantisBT
 
               ObjectRef projectRef = new ObjectRef();
               projectRef.id = send.ProjectID;
-              projectRef.name = send.ProjectName;
 
               IssueData issue = new IssueData();
               issue.summary = HttpUtility.HtmlEncode(send.Summary);

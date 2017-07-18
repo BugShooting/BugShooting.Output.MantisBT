@@ -9,92 +9,44 @@ namespace BS.Output.MantisBT
 {
   partial class Send : Window
   {
-
-   // TODO: Data Validieren: Project, Summary, Description, IssueID, Filename
-
+ 
     public Send(string url, string lastProjectID, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
     {
       InitializeComponent();
-      
-      NewIssue.Checked += NewIssue_CheckedChanged;
-      NewIssue.Unchecked += NewIssue_CheckedChanged;
-      NewIssue_CheckedChanged(null, EventArgs.Empty);
+      this.DataContext = this;
 
       UrlLabel.Text = url;
+
+      NewIssue.Checked += NewIssue_CheckedChanged;
+      NewIssue.Unchecked += NewIssue_CheckedChanged;
+      CreateNewIssue = true;
 
       List<ProjectItem> projectItems = new List<ProjectItem>();
       InitProjects(projectItems, projects, String.Empty);
 
       Projects.ItemsSource = projectItems;
       Projects.SelectedValue = lastProjectID;
-      IssueIDTextBox.Text = lastIssueID;
-      FileNameTextBox.Text = fileName;
-
-      SummaryTextBox.Focus();
+      IssueID = lastIssueID;
+      FileName = fileName;
       
     }
 
-    public bool CreateNewIssue
-    {
-      get { return NewIssue.IsChecked.Value; }
-    }
+    public bool CreateNewIssue { get; set; }
+ 
+    public string ProjectID { get; set; }
+  
+    public string Summary { get; set; }
 
-    public string ProjectID
-    {
-      get { return Projects.SelectedValue.ToString(); }
-    }
-
-    public string ProjectName
-    {
-      get { return Projects.SelectedValue.ToString(); }
-    }
-
-    public string Summary
-    {
-      get { return SummaryTextBox.Text; }
-    }
-
-
-    public string Description
-    {
-      get { return DescriptionTextBox.Text; }
-    }
-
-    public string IssueID
-    {
-      get { return IssueIDTextBox.Text; }
-    }
-
-    public string FileName
-    {
-      get { return FileNameTextBox.Text; }
-    }
-
+    public string Description { get; set; }
+   
+    public string IssueID { get; set; }
+  
+    public string FileName { get; set; }
+   
 
     private void OK_Click(object sender, RoutedEventArgs e)
     {
       this.DialogResult = true;
-    }
-
-    private void Cancel_Click(object sender, RoutedEventArgs e)
-    {
-      this.DialogResult = false;
-    }
-
-    protected override void OnPreviewKeyDown(KeyEventArgs e)
-    {
-      base.OnPreviewKeyDown(e);
-
-      switch (e.Key)
-      {
-        case Key.Enter:
-          OK_Click(this, e);
-          break;
-        case Key.Escape:
-          Cancel_Click(this, e);
-          break;
-      }
-
     }
 
     private void IssueID_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -108,55 +60,58 @@ namespace BS.Output.MantisBT
       SummaryControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
       DescriptionControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
       IssueIDControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Collapsed : Visibility.Visible;
+
+      if (NewIssue.IsChecked.Value)
+      {
+        SummaryTextBox.SelectAll();
+        SummaryTextBox.Focus();
+      }
+      else
+      { 
+        IssueIDTextBox.SelectAll();
+        IssueIDTextBox.Focus();
+      }
+
     }
 
     private void InitProjects(List<ProjectItem> projectItems, ProjectData[] projects, string parentProjectName)
     {
-      string projectName = null;
-
-
+      string fullName = null;
+      
       foreach (ProjectData project in projects)
       {
         if (parentProjectName == string.Empty)
         {
-          projectName = project.name;
+          fullName = project.name;
         }
         else
         {
-          projectName = parentProjectName + " - " + project.name;
+          fullName = parentProjectName + " - " + project.name;
         }
 
-        projectItems.Add(new ProjectItem(project.id, project.name, projectName));
+        projectItems.Add(new ProjectItem(project.id, fullName));
 
         if ((project.subprojects != null))
         {
-          InitProjects(projectItems, project.subprojects, projectName);
+          InitProjects(projectItems, project.subprojects, fullName);
         }
 
       }
 
     }
-    
-    private void AttachToIssue_Checked(object sender, RoutedEventArgs e)
-    {
-      IssueIDTextBox.SelectAll();
-      IssueIDTextBox.Focus();
-    }
-        
+  
   }
 
   internal class ProjectItem
   {
     
     private string projectID;
-    private string projectName;
-    private string name;
+    private string fullName;
 
-    public ProjectItem(string projectID, string projectName, string name)
+    public ProjectItem(string projectID, string fullName)
     {
       this.projectID = projectID;
-      this.projectName = projectName;
-      this.name = name;
+      this.fullName = fullName;
     }
 
     public string ProjectID
@@ -164,14 +119,9 @@ namespace BS.Output.MantisBT
       get { return projectID; }
     }
 
-    public string ProjectName
-    {
-      get { return projectName; }
-    }
-
     public override string ToString()
     {
-      return name;
+      return fullName;
     }
 
   }

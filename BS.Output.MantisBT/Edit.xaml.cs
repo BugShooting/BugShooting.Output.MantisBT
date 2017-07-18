@@ -6,10 +6,12 @@ namespace BS.Output.MantisBT
 {
   partial class Edit : Window
   {
+
     public Edit(Output output)
     {
       InitializeComponent();
-
+      this.DataContext = this;
+      
       foreach (string fileNameReplacement in V3.FileHelper.GetFileNameReplacements())
       {
         MenuItem item = new MenuItem();
@@ -26,57 +28,36 @@ namespace BS.Output.MantisBT
         FileFormatList.Items.Add(item);
       }
 
-      NameTextBox.Text = output.Name;
-      UrlTextBox.Text = output.Url;
-      UserTextBox.Text = output.UserName;
+      OutputName = output.Name;
+      Url = output.Url;
+      UserName = output.UserName;
+      FileName = output.FileName;
+      FileFormat = output.FileFormat;
       PasswordBox.Password = output.Password;
-      FileNameTextBox.Text = output.FileName;
-
-      FileFormatList.SelectedValue = output.FileFormat;
+      OpenItemInBrowser = output.OpenIssueInBrowser;
+         
       if (FileFormatList.SelectedValue is null)
-      {
         FileFormatList.SelectedIndex = 0;
-      }
-
-      OpenItemInBrowserCheckBox.IsChecked = output.OpenIssueInBrowser;
-
+  
     }
+     
+    public string OutputName { get; set; }
 
-    public string OutputName
-    {
-      get { return NameTextBox.Text; }
-    }
-
-    public string Url
-    {
-      get { return UrlTextBox.Text; }
-    }
-
-    public string UserName
-    {
-      get { return UserTextBox.Text; }
-    }
-
+    public string Url { get; set; }
+   
+    public string UserName { get; set; }
+ 
+    public string FileName { get; set; }
+   
+    public string FileFormat { get; set; }
+   
+    public bool OpenItemInBrowser { get; set; }
+   
     public string Password
     {
       get { return PasswordBox.Password; }
     }
-
-    public string FileName
-    {
-      get { return FileNameTextBox.Text; }
-    }
-
-    public string FileFormat
-    {
-      get { return FileFormatList.SelectedValue.ToString(); }
-    }
-
-    public bool OpenItemInBrowser
-    {
-      get { return OpenItemInBrowserCheckBox.IsChecked.Value; }
-    }
-
+    
     private void FileNameReplacement_Click(object sender, RoutedEventArgs e)
     {
       FileNameReplacement.ContextMenu.IsEnabled = true;
@@ -99,30 +80,16 @@ namespace BS.Output.MantisBT
 
     }
 
+    private void ValidateData(object sender, RoutedEventArgs e)
+    {
+      OK.IsEnabled = !Validation.GetHasError(OutputNameTextBox) &&
+                     !Validation.GetHasError(UrlTextBox) &&
+                     !Validation.GetHasError(FileFormatList);
+    }
+
     private void OK_Click(object sender, RoutedEventArgs e)
     {
-      this.DialogResult = true;
-    }
-
-    private void Cancel_Click(object sender, RoutedEventArgs e)
-    {
-      this.DialogResult = false;
-    }
-
-    protected override void OnPreviewKeyDown(KeyEventArgs e)
-    {
-      base.OnPreviewKeyDown(e);
-
-      switch (e.Key)
-      {
-        case Key.Enter:
-          OK_Click(this, e);
-          break;
-        case Key.Escape:
-          Cancel_Click(this, e);
-          break;
-      }
-            
+      DialogResult = true;     
     }
 
   }

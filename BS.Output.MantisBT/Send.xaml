@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:BS.Output.MantisBT"
         x:ClassModifier="internal"
         mc:Ignorable="d" 
         Title="Send"
@@ -14,15 +15,23 @@
   <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
     <TextBlock x:Name="UrlLabel" Margin="4" TextWrapping="Wrap" />
     <Separator Margin="4" />
-    <RadioButton x:Name="NewIssue" Content="New issue" Margin="4" IsChecked="True" />
-    <RadioButton x:Name="AttachToIssue" Content="Attach to issue" Margin="4" Checked="AttachToIssue_Checked" />
+    <RadioButton x:Name="NewIssue" Content="New issue" Margin="4" IsChecked="{Binding CreateNewIssue}" />
+    <RadioButton x:Name="AttachToIssue" Content="Attach to issue" Margin="4" />
     <Grid Margin="4" x:Name="ProjectControls">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Project</Label>
-      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" />
+      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" >
+        <ComboBox.SelectedValue>
+          <Binding Path="ProjectID" UpdateSourceTrigger="PropertyChanged">
+            <Binding.ValidationRules>
+              <local:NotNullOrEmptyValidationRule />
+            </Binding.ValidationRules>
+          </Binding>
+        </ComboBox.SelectedValue>
+      </ComboBox>
     </Grid>
     <Grid Margin="4" x:Name="SummaryControls">
       <Grid.ColumnDefinitions>
@@ -30,7 +39,13 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Summary</Label>
-      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" />
+      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" >
+        <Binding Path="Summary" UpdateSourceTrigger="PropertyChanged">
+          <Binding.ValidationRules>
+            <local:NotNullOrEmptyValidationRule />
+          </Binding.ValidationRules>
+        </Binding>
+      </TextBox>
     </Grid>
     <Grid Margin="4" x:Name="DescriptionControls">
       <Grid.ColumnDefinitions>
@@ -38,7 +53,13 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Description</Label>
-      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+      <TextBox Grid.Column="1" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+        <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+          <Binding.ValidationRules>
+            <local:NotNullOrEmptyValidationRule />
+          </Binding.ValidationRules>
+        </Binding>
+      </TextBox>
     </Grid>
     <Grid Margin="4" x:Name="IssueIDControls">
       <Grid.ColumnDefinitions>
@@ -46,7 +67,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Issue ID</Label>
-      <TextBox x:Name="IssueIDTextBox" Grid.Column="1" VerticalContentAlignment="Center" PreviewTextInput="IssueID_PreviewTextInput" />
+      <TextBox x:Name="IssueIDTextBox" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding IssueID, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="IssueID_PreviewTextInput" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -54,11 +75,11 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
-      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" />
+      <TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding FileName}" />
     </Grid>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
-      <Button Width="80" Height="24" Content="OK" Margin="4" Click="OK_Click" />
-      <Button Width="80" Height="24" Content="Cancel" Margin="4" Click="Cancel_Click" />
+      <Button Width="80" Height="24" Content="OK" Margin="4" IsDefault="True" Click="OK_Click" />
+      <Button Width="80" Height="24" Content="Cancel" Margin="4" IsCancel="True" />
     </StackPanel>
   </StackPanel>
 
