@@ -83,7 +83,7 @@ namespace BS.Output.MantisBT
 
     private void ValidateData(object sender, RoutedEventArgs e)
     {
-      OK.IsEnabled = !Validation.GetHasError(OutputNameTextBox) &&
+      OK.IsEnabled = !Validation.GetHasError(NameTextBox) &&
                      !Validation.GetHasError(UrlTextBox) &&
                      !Validation.GetHasError(FileFormatList);
     }

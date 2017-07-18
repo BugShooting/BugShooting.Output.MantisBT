@@ -19,7 +19,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Name</Label>
-      <TextBox x:Name="OutputNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData" >
+      <TextBox x:Name="NameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData" >
         <Binding Path="OutputName" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
           <Binding.ValidationRules>
             <local:NotNullOrEmptyValidationRule />
