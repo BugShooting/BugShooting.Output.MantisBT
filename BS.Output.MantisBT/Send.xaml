@@ -72,7 +72,7 @@
             <DataTrigger Binding="{Binding ElementName=NewIssue, Path=IsChecked}" Value="True">
               <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=NewIssue, Path=IsChecked}" Value="False">
+            <DataTrigger Binding="{Binding ElementName=NewIssue, Path=IsChecked}"  Value="False">
               <Setter Property="Visibility" Value="Visible" />
             </DataTrigger>
           </Style.Triggers>
