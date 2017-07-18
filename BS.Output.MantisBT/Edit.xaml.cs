@@ -10,6 +10,7 @@ namespace BS.Output.MantisBT
     public Edit(Output output)
     {
       InitializeComponent();
+
       this.DataContext = this;
       
       foreach (string fileNameReplacement in V3.FileHelper.GetFileNameReplacements())

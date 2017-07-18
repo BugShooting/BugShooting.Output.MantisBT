@@ -27,9 +27,9 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Project</Label>
-      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" SelectionChanged="ValidateData" >
+      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" Validation.Error="ValidateData" >
         <ComboBox.SelectedValue>
-          <Binding Path="ProjectID" UpdateSourceTrigger="PropertyChanged">
+          <Binding Path="ProjectID" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
             <Binding.ValidationRules>
               <local:NotNullOrEmptyValidationRule />
             </Binding.ValidationRules>
@@ -43,8 +43,8 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Summary</Label>
-      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="ValidateData" >
-        <Binding Path="Summary" UpdateSourceTrigger="PropertyChanged">
+      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData" >
+        <Binding Path="Summary" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
           <Binding.ValidationRules>
             <local:NotNullOrEmptyValidationRule />
           </Binding.ValidationRules>
@@ -57,8 +57,8 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Description</Label>
-      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" TextChanged="ValidateData" >
-        <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" VerticalContentAlignment="Center" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" Validation.Error="ValidateData" >
+        <Binding Path="Description" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
           <Binding.ValidationRules>
             <local:NotNullOrEmptyValidationRule />
           </Binding.ValidationRules>
@@ -91,8 +91,8 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
-      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="ValidateData">
-        <Binding Path="FileName" UpdateSourceTrigger="PropertyChanged">
+      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData">
+        <Binding Path="FileName" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
           <Binding.ValidationRules>
             <local:NotNullOrEmptyValidationRule />
           </Binding.ValidationRules>

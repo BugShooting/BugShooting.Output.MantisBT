@@ -14,6 +14,7 @@ namespace BS.Output.MantisBT
     public Send(string url, string lastProjectID, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
     {
       InitializeComponent();
+
       this.DataContext = this;
 
       UrlLabel.Text = url;
@@ -23,7 +24,6 @@ namespace BS.Output.MantisBT
       
       List<ProjectItem> projectItems = new List<ProjectItem>();
       InitProjects(projectItems, projects, String.Empty);
-
       Projects.ItemsSource = projectItems;
 
       CreateNewIssue = true;
