@@ -69,7 +69,7 @@
           <ContextMenu x:Name="FileNameReplacementList" />
         </Button.ContextMenu>
       </Button>
-      <ComboBox x:Name="FileFormatList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" Validation.Error="ValidateData" SelectedValue="{Binding FileFormat, UpdateSourceTrigger=PropertyChanged}"/>
+      <ComboBox x:Name="FileFormatList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" SelectedValue="{Binding FileFormat, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
