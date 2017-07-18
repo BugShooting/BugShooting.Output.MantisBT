@@ -20,13 +20,14 @@ namespace BS.Output.MantisBT
 
       NewIssue.Checked += NewIssue_CheckedChanged;
       NewIssue.Unchecked += NewIssue_CheckedChanged;
-      CreateNewIssue = true;
-
+      
       List<ProjectItem> projectItems = new List<ProjectItem>();
       InitProjects(projectItems, projects, String.Empty);
 
       Projects.ItemsSource = projectItems;
-      Projects.SelectedValue = lastProjectID;
+
+      CreateNewIssue = true;
+      ProjectID = lastProjectID;
       IssueID = lastIssueID;
       FileName = fileName;
       
@@ -72,10 +73,6 @@ namespace BS.Output.MantisBT
 
     private void NewIssue_CheckedChanged(object sender, EventArgs e)
     {
-      ProjectControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
-      SummaryControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
-      DescriptionControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Visible : Visibility.Collapsed;
-      IssueIDControls.Visibility = (NewIssue.IsChecked.Value) ? Visibility.Collapsed : Visibility.Visible;
 
       if (NewIssue.IsChecked.Value)
       {
