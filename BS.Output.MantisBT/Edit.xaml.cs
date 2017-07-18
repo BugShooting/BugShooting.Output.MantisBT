@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BS.Output.MantisBT
 {
@@ -12,7 +13,7 @@ namespace BS.Output.MantisBT
       InitializeComponent();
 
       this.DataContext = this;
-      
+
       foreach (string fileNameReplacement in V3.FileHelper.GetFileNameReplacements())
       {
         MenuItem item = new MenuItem();
@@ -21,7 +22,8 @@ namespace BS.Output.MantisBT
         FileNameReplacementList.Items.Add(item);
       }
 
-      foreach (string fileFormat in V3.FileHelper.GetFileFormats())
+      IEnumerable<string> fileFormats = V3.FileHelper.GetFileFormats();
+      foreach (string fileFormat in fileFormats)
       {
         ComboBoxItem item = new ComboBoxItem();
         item.Content = fileFormat;
@@ -33,13 +35,18 @@ namespace BS.Output.MantisBT
       Url = output.Url;
       UserName = output.UserName;
       FileName = output.FileName;
-      FileFormat = output.FileFormat;
+
+      if (fileFormats.Contains(output.FileFormat))
+      {
+        FileFormat = output.FileFormat;
+      }
+      else {
+        FileFormat = fileFormats.First();
+      }
+      
       PasswordBox.Password = output.Password;
       OpenItemInBrowser = output.OpenIssueInBrowser;
          
-      if (FileFormatList.SelectedValue is null)
-        FileFormatList.SelectedIndex = 0;
-  
     }
      
     public string OutputName { get; set; }
@@ -84,8 +91,7 @@ namespace BS.Output.MantisBT
     private void ValidateData(object sender, RoutedEventArgs e)
     {
       OK.IsEnabled = !Validation.GetHasError(NameTextBox) &&
-                     !Validation.GetHasError(UrlTextBox) &&
-                     !Validation.GetHasError(FileFormatList);
+                     !Validation.GetHasError(UrlTextBox);
     }
 
     private void OK_Click(object sender, RoutedEventArgs e)
