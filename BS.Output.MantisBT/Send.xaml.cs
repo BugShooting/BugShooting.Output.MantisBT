@@ -14,36 +14,55 @@ namespace BS.Output.MantisBT
     public Send(string url, string lastProjectID, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
     {
       InitializeComponent();
-
-      this.DataContext = this;
-
-      UrlLabel.Text = url;
-
-      NewIssue.Checked += NewIssue_CheckedChanged;
-      NewIssue.Unchecked += NewIssue_CheckedChanged;
       
       List<ProjectItem> projectItems = new List<ProjectItem>();
       InitProjects(projectItems, projects, String.Empty);
-      Projects.ItemsSource = projectItems;
+      ProjectComboBox.ItemsSource = projectItems;
 
-      CreateNewIssue = true;
-      ProjectID = lastProjectID;
-      IssueID = lastIssueID;
-      FileName = fileName;
-      
+      Url.Text = url;
+      NewIssue.IsChecked = true;
+      ProjectComboBox.SelectedValue = lastProjectID;
+      IssueIDTextBox.Text = lastIssueID;
+      FileNameTextBox.Text = fileName;
+
+      ProjectComboBox.SelectionChanged += ValidateData;
+      SummaryTextBox.TextChanged += ValidateData;
+      DescriptionTextBox.TextChanged += ValidateData;
+      IssueIDTextBox.TextChanged += ValidateData;
+      FileNameTextBox.TextChanged += ValidateData;
+      ValidateData(null, null);
+
     }
 
-    public bool CreateNewIssue { get; set; }
+    public bool CreateNewIssue
+    {
+      get { return NewIssue.IsChecked.Value; }
+    }
  
-    public string ProjectID { get; set; }
-  
-    public string Summary { get; set; }
+    public string ProjectID
+    {
+      get { return (string)ProjectComboBox.SelectedValue; }
+    }
+      
+    public string Summary
+    {
+      get { return SummaryTextBox.Text; }
+    }
 
-    public string Description { get; set; }
-   
-    public string IssueID { get; set; }
-  
-    public string FileName { get; set; }
+    public string Description
+    {
+      get { return DescriptionTextBox.Text; }
+    }
+
+    public string IssueID
+    {
+      get { return IssueIDTextBox.Text; }
+    }
+
+    public string FileName
+    {
+      get { return FileNameTextBox.Text; }
+    }
 
     private void InitProjects(List<ProjectItem> projectItems, ProjectData[] projects, string parentProjectName)
     {
@@ -76,11 +95,21 @@ namespace BS.Output.MantisBT
 
       if (NewIssue.IsChecked.Value)
       {
+        ProjectControls.Visibility = Visibility.Visible;
+        SummaryControls.Visibility = Visibility.Visible;
+        DescriptionControls.Visibility = Visibility.Visible;
+        IssueIDControls.Visibility = Visibility.Collapsed;
+
         SummaryTextBox.SelectAll();
         SummaryTextBox.Focus();
       }
       else
       {
+        ProjectControls.Visibility = Visibility.Collapsed;
+        SummaryControls.Visibility = Visibility.Collapsed;
+        DescriptionControls.Visibility = Visibility.Collapsed;
+        IssueIDControls.Visibility = Visibility.Visible;
+        
         IssueIDTextBox.SelectAll();
         IssueIDTextBox.Focus();
       }
@@ -94,10 +123,11 @@ namespace BS.Output.MantisBT
       e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
     }
     
-    private void ValidateData(object sender, RoutedEventArgs e)
+    private void ValidateData(object sender, EventArgs e)
     {
-      OK.IsEnabled = (!NewIssue.IsChecked.Value || (!Validation.GetHasError(Projects) && !Validation.GetHasError(SummaryTextBox) && !Validation.GetHasError(DescriptionTextBox))) && 
-                     !Validation.GetHasError(FileNameTextBox);
+      OK.IsEnabled = ((CreateNewIssue && Validation.IsValid(ProjectComboBox) && Validation.IsValid(SummaryTextBox) && Validation.IsValid(DescriptionTextBox)) ||
+                      (!CreateNewIssue && Validation.IsValid(IssueIDTextBox))) &&
+                     Validation.IsValid(FileNameTextBox);
     }
 
     private void OK_Click(object sender, RoutedEventArgs e)

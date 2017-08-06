@@ -12,78 +12,42 @@
         Width="300"
         SizeToContent="Height">
 
-  <Window.Resources>
-    <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-  </Window.Resources>
-
   <StackPanel Grid.IsSharedSizeScope="True" Margin="4">
-    <TextBlock x:Name="UrlLabel" Margin="4" TextWrapping="Wrap" />
+    <TextBlock x:Name="Url" Margin="4" TextWrapping="Wrap" />
     <Separator Margin="4" />
-    <RadioButton x:Name="NewIssue" Content="New issue" Margin="4" IsChecked="{Binding CreateNewIssue}" />
+    <RadioButton x:Name="NewIssue" Content="New issue" Margin="4" Checked="NewIssue_CheckedChanged" Unchecked="NewIssue_CheckedChanged" />
     <RadioButton x:Name="AttachToIssue" Content="Attach to issue" Margin="4" />
-    <Grid Margin="4" Visibility="{Binding ElementName=NewIssue, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+    <Grid x:Name="ProjectControls" Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Project</Label>
-      <ComboBox x:Name="Projects" Grid.Column="1" SelectedValuePath="ProjectID" Validation.Error="ValidateData" >
-        <ComboBox.SelectedValue>
-          <Binding Path="ProjectID" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-            <Binding.ValidationRules>
-              <local:NotNullOrEmptyValidationRule />
-            </Binding.ValidationRules>
-          </Binding>
-        </ComboBox.SelectedValue>
-      </ComboBox>
+      <ComboBox x:Name="ProjectComboBox" Grid.Column="1" SelectedValuePath="ProjectID" local:Validation.Required="True" />
     </Grid>
-    <Grid Margin="4" Visibility="{Binding ElementName=NewIssue, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+    <Grid x:Name="SummaryControls" Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Summary</Label>
-      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData" >
-        <Binding Path="Summary" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-          <Binding.ValidationRules>
-            <local:NotNullOrEmptyValidationRule />
-          </Binding.ValidationRules>
-        </Binding>
-      </TextBox>
+      <TextBox x:Name="SummaryTextBox" Grid.Column="1" VerticalContentAlignment="Center" local:Validation.Required="True" />
     </Grid>
-    <Grid Margin="4" Visibility="{Binding ElementName=NewIssue, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+    <Grid x:Name="DescriptionControls" Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Description</Label>
-      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" VerticalContentAlignment="Center" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" Validation.Error="ValidateData" >
-        <Binding Path="Description" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-          <Binding.ValidationRules>
-            <local:NotNullOrEmptyValidationRule />
-          </Binding.ValidationRules>
-        </Binding>
-      </TextBox>
+      <TextBox x:Name="DescriptionTextBox" Grid.Column="1" VerticalContentAlignment="Center" MaxLines="5" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" local:Validation.Required="True" />
     </Grid>
-    <Grid Margin="4">
-      <Grid.Style>
-        <Style TargetType="{x:Type Grid}">
-          <Style.Triggers>
-            <DataTrigger Binding="{Binding ElementName=NewIssue, Path=IsChecked}" Value="True">
-              <Setter Property="Visibility" Value="Collapsed" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=NewIssue, Path=IsChecked}"  Value="False">
-              <Setter Property="Visibility" Value="Visible" />
-            </DataTrigger>
-          </Style.Triggers>
-        </Style>
-      </Grid.Style>
+    <Grid x:Name="IssueIDControls" Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Issue ID</Label>
-      <TextBox x:Name="IssueIDTextBox" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding IssueID, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="IssueID_PreviewTextInput" />
+      <TextBox x:Name="IssueIDTextBox" Grid.Column="1" VerticalContentAlignment="Center" PreviewTextInput="IssueID_PreviewTextInput" local:Validation.Required="True" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -91,13 +55,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
-      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData">
-        <Binding Path="FileName" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-          <Binding.ValidationRules>
-            <local:NotNullOrEmptyValidationRule />
-          </Binding.ValidationRules>
-        </Binding>
-      </TextBox>
+      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" local:Validation.Required="True" />
     </Grid>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
       <Button x:Name="OK" Width="80" Height="24" Content="OK" Margin="4" IsDefault="True" Click="OK_Click" />

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,7 @@ namespace BS.Output.MantisBT
     public Edit(Output output)
     {
       InitializeComponent();
-
-      this.DataContext = this;
-
+      
       foreach (string fileNameReplacement in V3.FileHelper.GetFileNameReplacements())
       {
         MenuItem item = new MenuItem();
@@ -28,43 +27,68 @@ namespace BS.Output.MantisBT
         ComboBoxItem item = new ComboBoxItem();
         item.Content = fileFormat;
         item.Tag = fileFormat;
-        FileFormatList.Items.Add(item);
+        FileFormatComboBox.Items.Add(item);
       }
 
-      OutputName = output.Name;
-      Url = output.Url;
-      UserName = output.UserName;
-      FileName = output.FileName;
+      NameTextBox.Text = output.Name;
+      UrlTextBox.Text = output.Url;
+      UserNameTextBox.Text = output.UserName;
+      PasswordBox.Password = output.Password;
+      FileNameTextBox.Text = output.FileName;
 
       if (fileFormats.Contains(output.FileFormat))
       {
-        FileFormat = output.FileFormat;
+        FileFormatComboBox.SelectedValue = output.FileFormat;
       }
       else {
-        FileFormat = fileFormats.First();
+        FileFormatComboBox.SelectedValue = fileFormats.First();
       }
-      
-      PasswordBox.Password = output.Password;
-      OpenItemInBrowser = output.OpenIssueInBrowser;
-         
+            
+      OpenItemInBrowserCheckBox.IsChecked = output.OpenIssueInBrowser;
+
+      NameTextBox.TextChanged += ValidateData;
+      UrlTextBox.TextChanged += ValidateData;
+      FileFormatComboBox.SelectionChanged += ValidateData;
+      ValidateData(null, null);
+
     }
      
-    public string OutputName { get; set; }
+    public string OutputName
+    {
+      get { return NameTextBox.Text; }
+    }
 
-    public string Url { get; set; }
-   
-    public string UserName { get; set; }
- 
-    public string FileName { get; set; }
-   
-    public string FileFormat { get; set; }
-   
-    public bool OpenItemInBrowser { get; set; }
-   
+    public string Url
+    {
+      get { return UrlTextBox.Text; }
+    }
+
+    public string UserName
+    {
+      get { return UserNameTextBox.Text; }
+    }
+
     public string Password
     {
       get { return PasswordBox.Password; }
     }
+
+    public string FileName
+    {
+      get { return FileNameTextBox.Text; }
+    }
+
+    public string FileFormat
+    {
+      get { return (string)FileFormatComboBox.SelectedValue; }
+    }
+
+    public bool OpenItemInBrowser
+    {
+      get { return OpenItemInBrowserCheckBox.IsChecked.Value; }
+    }
+   
+
     
     private void FileNameReplacement_Click(object sender, RoutedEventArgs e)
     {
@@ -88,10 +112,11 @@ namespace BS.Output.MantisBT
 
     }
 
-    private void ValidateData(object sender, RoutedEventArgs e)
+    private void ValidateData(object sender, EventArgs e)
     {
-      OK.IsEnabled = !Validation.GetHasError(NameTextBox) &&
-                     !Validation.GetHasError(UrlTextBox);
+      OK.IsEnabled = Validation.IsValid(NameTextBox) &&
+                     Validation.IsValid(UrlTextBox) &&
+                     Validation.IsValid(FileFormatComboBox);
     }
 
     private void OK_Click(object sender, RoutedEventArgs e)

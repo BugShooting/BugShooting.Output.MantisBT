@@ -19,13 +19,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Name</Label>
-      <TextBox x:Name="NameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData" >
-        <Binding Path="OutputName" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-          <Binding.ValidationRules>
-            <local:NotNullOrEmptyValidationRule />
-          </Binding.ValidationRules>
-        </Binding>
-      </TextBox>
+      <TextBox x:Name="NameTextBox" Grid.Column="1" VerticalContentAlignment="Center" local:Validation.Required="True" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -33,13 +27,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">Url</Label>
-      <TextBox x:Name="UrlTextBox" Grid.Column="1" VerticalContentAlignment="Center" Validation.Error="ValidateData" >
-        <Binding Path="Url" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-          <Binding.ValidationRules>
-            <local:NotNullOrEmptyValidationRule />
-          </Binding.ValidationRules>
-        </Binding>
-      </TextBox>
+      <TextBox x:Name="UrlTextBox" Grid.Column="1" VerticalContentAlignment="Center" local:Validation.Required="True" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -47,7 +35,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">User</Label>
-      <TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBox x:Name="UserNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
@@ -63,20 +51,20 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0">File name</Label>
-      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,94,0" ContextMenuService.IsEnabled="False" Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}"/>
+      <TextBox x:Name="FileNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,94,0" ContextMenuService.IsEnabled="False" />
       <Button x:Name="FileNameReplacement"  Grid.Column="1" Content="%" Width="25" HorizontalAlignment="Right" Margin="0,0,68,0" Click="FileNameReplacement_Click">
         <Button.ContextMenu>
           <ContextMenu x:Name="FileNameReplacementList" />
         </Button.ContextMenu>
       </Button>
-      <ComboBox x:Name="FileFormatList" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" SelectedValue="{Binding FileFormat, UpdateSourceTrigger=PropertyChanged}" />
+      <ComboBox x:Name="FileFormatComboBox" Grid.Column="1" Width="60" HorizontalAlignment="Right" SelectedValuePath="Tag" local:Validation.Required="True" />
     </Grid>
     <Grid Margin="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-      <CheckBox Grid.Column="1" Content="Open item in browser after sending" IsChecked="{Binding OpenItemInBrowser, UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox x:Name="OpenItemInBrowserCheckBox" Grid.Column="1" Content="Open item in browser after sending" />
     </Grid>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
       <Button x:Name="OK" Width="80" Height="24" Content="OK" Margin="4" IsDefault="True" Click="OK_Click" />

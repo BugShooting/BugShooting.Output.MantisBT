@@ -148,11 +148,7 @@ namespace BS.Output.MantisBT
           {
 
             // Show credentials window
-            Credentials credentials = new Credentials();
-            credentials.Url = Output.Url;
-            credentials.UserName = userName;
-            credentials.Password = password;
-            credentials.Remember = rememberCredentials;
+            Credentials credentials = new Credentials(Output.Url, userName, password, rememberCredentials);
 
             var ownerHelper = new System.Windows.Interop.WindowInteropHelper(credentials);
             ownerHelper.Owner = Owner.Handle;

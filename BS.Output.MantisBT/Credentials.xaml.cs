@@ -6,23 +6,31 @@ namespace BS.Output.MantisBT
   partial class Credentials : Window
   {
 
-    public Credentials()
+    public Credentials(string url, string userName, string password, bool remember)
     {
       InitializeComponent();
-      this.DataContext = this;
+
+      Url.Text = url;
+      UserNameTextBox.Text = userName;
+      PasswordBox.Password = password;
+      RememberCheckBox.IsChecked = remember;
+
     }
-
-    public string Url { get; set; }
-
-    public string UserName { get; set; }
+    
+    public string UserName
+    {
+      get { return UserNameTextBox.Text; }
+    }
    
     public string Password
     {
       get { return PasswordBox.Password; }
-      set { PasswordBox.Password = value; }
     }
 
-    public bool Remember { get; set; }
+    public bool Remember
+    {
+      get { return RememberCheckBox.IsChecked.Value; }
+    }
   
     private void OK_Click(object sender, RoutedEventArgs e)
     {
