@@ -33,7 +33,6 @@ namespace BS.Output.MantisBT
           textbox.Loaded += new RoutedEventHandler(Element_Validate);
           textbox.TextChanged += new TextChangedEventHandler(Element_Validate);
           textbox.IsVisibleChanged += new DependencyPropertyChangedEventHandler(Element_Validate);
-          Validate(textbox);
         }
         else if (obj is ComboBox)
         {
@@ -41,14 +40,15 @@ namespace BS.Output.MantisBT
           combobox.Loaded += new RoutedEventHandler(Element_Validate);
           combobox.SelectionChanged += new SelectionChangedEventHandler(Element_Validate);
           combobox.IsVisibleChanged += new DependencyPropertyChangedEventHandler(Element_Validate);
-          Validate(combobox);
         }
         else
         {
           throw new NotSupportedException(string.Format("Type {0} not supported", obj.GetType().ToString()));
         }
-
       }
+
+      Validate((UIElement)obj);
+
     }
 
     private static void ShowValidationBorder(UIElement element, bool show)
