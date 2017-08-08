@@ -51,6 +51,8 @@ namespace BS.Output.MantisBT
       FileFormatComboBox.SelectionChanged += ValidateData;
       ValidateData(null, null);
 
+      UrlTextBox.Focus();
+
     }
      
     public string OutputName
