@@ -90,7 +90,6 @@ namespace BS.Output.MantisBT
       get { return OpenItemInBrowserCheckBox.IsChecked.Value; }
     }
    
-
     
     private void FileNameReplacement_Click(object sender, RoutedEventArgs e)
     {
