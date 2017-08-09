@@ -11,7 +11,7 @@
 			<iconUrl>https://github.com/BugShooting/Output.MantisBT/raw/master/BS.Output.MantisBT/Resources/logo_64.png</iconUrl>
 			<requireLicenseAcceptance>false</requireLicenseAcceptance>
 			<releaseNotes />
-			<description>Attach screenshots to Mantis BT Issues.</description>
+			<description>Attach screenshots to Mantis BT issues.</description>
 			<copyright />
 			<tags>bugshooting.com/output/v3</tags>
     </metadata>
