@@ -33,7 +33,7 @@ namespace BS.Output.MantisBT
 
     protected override string Description
     {
-      get { return "Attach screenshots to Mantis BT Issues."; }
+      get { return "Attach screenshots to Mantis BT issues."; }
     }
     
     protected override Output CreateOutput(IWin32Window Owner)
