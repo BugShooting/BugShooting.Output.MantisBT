@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BS.Output.MantisBT
+﻿namespace BS.Output.MantisBT
 {
 
   public class Output: IOutput 
