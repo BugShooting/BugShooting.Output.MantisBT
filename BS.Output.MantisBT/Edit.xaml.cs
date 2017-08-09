@@ -44,7 +44,7 @@ namespace BS.Output.MantisBT
         FileFormatComboBox.SelectedValue = fileFormats.First();
       }
             
-      OpenItemInBrowserCheckBox.IsChecked = output.OpenIssueInBrowser;
+      OpenItemInBrowserCheckBox.IsChecked = output.OpenItemInBrowser;
 
       NameTextBox.TextChanged += ValidateData;
       UrlTextBox.TextChanged += ValidateData;

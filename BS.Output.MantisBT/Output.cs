@@ -12,7 +12,7 @@ namespace BS.Output.MantisBT
     string password;
     string fileName;
     string fileFormat;
-    bool openIssueInBrowser;
+    bool openItemInBrowser;
     string lastProjectID;
     string lastIssueID;
 
@@ -22,7 +22,7 @@ namespace BS.Output.MantisBT
                   string password, 
                   string fileName, 
                   string fileFormat,
-                  bool openIssueInBrowser, 
+                  bool openItemInBrowser, 
                   string lastProjectID, 
                   string lastIssueID)
     {
@@ -32,7 +32,7 @@ namespace BS.Output.MantisBT
       this.password = password;
       this.fileName = fileName;
       this.fileFormat = fileFormat;
-      this.openIssueInBrowser = openIssueInBrowser;
+      this.openItemInBrowser = openItemInBrowser;
       this.lastProjectID = lastProjectID;
       this.lastIssueID = lastIssueID;
     }
@@ -72,9 +72,9 @@ namespace BS.Output.MantisBT
       get { return fileFormat; }
     }
 
-    public bool OpenIssueInBrowser
+    public bool OpenItemInBrowser
     {
-      get { return openIssueInBrowser; }
+      get { return openItemInBrowser; }
     }
     
     public string LastProjectID

@@ -89,7 +89,7 @@ namespace BS.Output.MantisBT
       outputValues.Add(new OutputValue("Url", Output.Url));
       outputValues.Add(new OutputValue("UserName", Output.UserName));
       outputValues.Add(new OutputValue("Password",Output.Password, true));
-      outputValues.Add(new OutputValue("OpenIssueInBrowser", Convert.ToString(Output.OpenIssueInBrowser)));
+      outputValues.Add(new OutputValue("OpenItemInBrowser", Convert.ToString(Output.OpenItemInBrowser)));
       outputValues.Add(new OutputValue("FileName", Output.FileName));
       outputValues.Add(new OutputValue("FileFormat", Output.FileFormat));
       outputValues.Add(new OutputValue("LastProjectID", Output.LastProjectID));
@@ -108,7 +108,7 @@ namespace BS.Output.MantisBT
                         OutputValues["Password", ""].Value, 
                         OutputValues["FileName", "Screenshot"].Value, 
                         OutputValues["FileFormat", ""].Value,
-                        Convert.ToBoolean(OutputValues["OpenIssueInBrowser", Convert.ToString(true)].Value),
+                        Convert.ToBoolean(OutputValues["OpenItemInBrowser", Convert.ToString(true)].Value),
                         OutputValues["LastProjectID", string.Empty].Value, 
                         OutputValues["LastIssueID", "1"].Value);
 
@@ -229,7 +229,7 @@ namespace BS.Output.MantisBT
 
 
             // Open issue in browser
-            if (Output.OpenIssueInBrowser)
+            if (Output.OpenItemInBrowser)
             {
               V3.WebHelper.OpenUrl(Output.Url + "/view.php?id=" + issueID);
             }
@@ -242,7 +242,7 @@ namespace BS.Output.MantisBT
                                                 (rememberCredentials) ? password : Output.Password,
                                                 Output.FileName,
                                                 Output.FileFormat,
-                                                Output.OpenIssueInBrowser, 
+                                                Output.OpenItemInBrowser, 
                                                 projectID, 
                                                 issueID));
 
