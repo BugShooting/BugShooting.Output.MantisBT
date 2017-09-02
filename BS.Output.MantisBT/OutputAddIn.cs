@@ -216,7 +216,7 @@ namespace BS.Output.MantisBT
             }
             else
             {
-              issueID = Convert.ToString(send.IssueID);
+              issueID = send.IssueID;
               projectID = Output.LastProjectID;
             }
 
