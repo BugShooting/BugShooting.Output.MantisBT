@@ -220,18 +220,17 @@ namespace BS.Output.MantisBT
               projectID = Output.LastProjectID;
             }
 
-            string fullFileName = send.FileName + "." + V3.FileHelper.GetFileExtention(Output.FileFormat);
-
-            string mimeType = V3.FileHelper.GetMimeType(Output.FileFormat);
+            string fullFileName = String.Format("{0}.{1}", send.FileName, V3.FileHelper.GetFileExtention(Output.FileFormat));
+            string fileMimeType = V3.FileHelper.GetMimeType(Output.FileFormat);
             byte[] fileBytes = V3.FileHelper.GetFileBytes(Output.FileFormat, ImageData);
 
-            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fullFileName, mimeType, fileBytes));
+            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fullFileName, fileMimeType, fileBytes));
 
 
             // Open issue in browser
             if (Output.OpenItemInBrowser)
             {
-              V3.WebHelper.OpenUrl(Output.Url + "/view.php?id=" + issueID);
+              V3.WebHelper.OpenUrl(String.Format("{0}/view.php?id={1}", Output.Url, issueID));
             }
                     
 
