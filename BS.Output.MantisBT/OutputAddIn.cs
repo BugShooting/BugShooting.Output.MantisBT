@@ -93,7 +93,7 @@ namespace BS.Output.MantisBT
       outputValues.Add(new OutputValue("FileName", Output.FileName));
       outputValues.Add(new OutputValue("FileFormat", Output.FileFormat));
       outputValues.Add(new OutputValue("LastProjectID", Output.LastProjectID));
-      outputValues.Add(new OutputValue("LastIssueID", Convert.ToString(Output.LastIssueID)));
+      outputValues.Add(new OutputValue("LastIssueID", Output.LastIssueID));
 
       return outputValues;
       
