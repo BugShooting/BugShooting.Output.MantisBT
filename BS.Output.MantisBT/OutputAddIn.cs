@@ -171,7 +171,7 @@ namespace BS.Output.MantisBT
             ProjectData[] projects = await Task.Factory.StartNew(() => mantisConnect.mc_projects_get_user_accessible(userName, password));
 
             // Show send window
-            Send send = new Send(Output.Url, Output.LastProjectID, Output.LastIssueID, projects, userName, password, fileName);
+            Send send = new Send(Output.Url, Output.LastProjectID, Output.LastIssueID, projects, fileName);
 
             var ownerHelper = new System.Windows.Interop.WindowInteropHelper(send);
             ownerHelper.Owner = Owner.Handle;

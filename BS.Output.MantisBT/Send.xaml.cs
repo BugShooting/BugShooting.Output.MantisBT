@@ -11,7 +11,7 @@ namespace BS.Output.MantisBT
   partial class Send : Window
   {
  
-    public Send(string url, string lastProjectID, string lastIssueID, ProjectData[] projects, string userName, string password, string fileName)
+    public Send(string url, string lastProjectID, string lastIssueID, ProjectData[] projects, string fileName)
     {
       InitializeComponent();
       
