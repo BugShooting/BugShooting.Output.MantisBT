@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BS.Output">
-      <HintPath>O:\Bin\BS.Output.dll</HintPath>
+    <Reference Include="BS.Output, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BugShootingOutputApi.3.0.0\lib\BS.Output.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -126,6 +127,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MantisConnect_2_4_0\mantisconnect.wsdl" />
+    <None Include="packages.config" />
     <None Include="Resources\logo_64.png" />
   </ItemGroup>
   <ItemGroup>
