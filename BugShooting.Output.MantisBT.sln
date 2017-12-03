@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{F6580491-A788-4604-9B10-31AE99C6A1A3}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\BugShooting.Output.MantisBT.nuspec = NuGet\BugShooting.Output.MantisBT.nuspec
+		NuGet\nuget.exe = NuGet\nuget.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4482933-2632-47BD-9457-DC948D3E99F6}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugShooting.Output.MantisBT", "BugShooting.Output.MantisBT\BugShooting.Output.MantisBT.csproj", "{72AE9E3B-42E3-444C-B460-F17A2CD6AD14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72AE9E3B-42E3-444C-B460-F17A2CD6AD14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72AE9E3B-42E3-444C-B460-F17A2CD6AD14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72AE9E3B-42E3-444C-B460-F17A2CD6AD14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72AE9E3B-42E3-444C-B460-F17A2CD6AD14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D1DD488-CDEE-4883-AF9F-F65A77867FEB}
+	EndGlobalSection
+EndGlobal

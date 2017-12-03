@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+			<id>BugShooting.Output.MantisBT</id>
+			<version>1.0.0</version>
+			<title>MantisBT Output for Bug Shooting</title>
+      <authors>Bug Shooting, Alexej Hirsch</authors>
+      <owners>Bug Shooting, Alexej Hirsch</owners>
+      <licenseUrl>https://github.com/BugShooting/BugShooting.Output.MantisBT/raw/master/LICENSE.txt</licenseUrl>
+			<projectUrl>https://github.com/BugShooting</projectUrl>
+			<iconUrl>https://github.com/BugShooting/BugShooting.Output.MantisBT/raw/master/BugShooting.Output.MantisBT/Resources/logo_64.png</iconUrl>
+			<requireLicenseAcceptance>false</requireLicenseAcceptance>
+			<releaseNotes />
+			<description>Attach screenshots to Mantis BT issues.</description>
+			<copyright />
+			<tags>bugshooting.plugin.v3.output</tags>
+    </metadata>
+    <files>
+			<file src="BugShooting.Output.MantisBT.dll" />
+    </files>
+</package>
