@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BS.Plugin.V3, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BugShooting.Plugin.V3.3.0.0\lib\BS.Plugin.V3.dll</HintPath>
+    <Reference Include="BS.Plugin.V3, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BugShooting.Plugin.V3.3.0.1\lib\BS.Plugin.V3.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
