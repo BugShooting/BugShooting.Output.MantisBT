@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BS.Plugin.V3, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BugShooting.Plugin.V3.3.0.5\lib\BS.Plugin.V3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -122,6 +127,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MantisConnect_2_4_0\mantisconnect.wsdl" />
+    <None Include="packages.config" />
     <None Include="Resources\logo_64.png" />
   </ItemGroup>
   <ItemGroup>
