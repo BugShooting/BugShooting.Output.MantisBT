@@ -8,7 +8,7 @@ using BugShooting.Output.MantisBT.MantisConnect_2_4_0;
 using BS.Plugin.V3.Output;
 using BS.Plugin.V3.Common;
 using BS.Plugin.V3.Utilities;
-
+using System.Linq;
 
 namespace BugShooting.Output.MantisBT
 {
@@ -48,7 +48,7 @@ namespace BugShooting.Output.MantisBT
                                  String.Empty, 
                                  String.Empty, 
                                  "Screenshot",
-                                 String.Empty, 
+                                 FileHelper.GetFileFormats().First().ID, 
                                  true,
                                  String.Empty,
                                  "1");
@@ -72,7 +72,7 @@ namespace BugShooting.Output.MantisBT
                           edit.UserName,
                           edit.Password,
                           edit.FileName,
-                          edit.FileFormat,
+                          edit.FileFormatID,
                           edit.OpenItemInBrowser,
                           Output.LastProjectID,
                           Output.LastIssueID);
@@ -95,7 +95,7 @@ namespace BugShooting.Output.MantisBT
       outputValues.Add("Password",Output.Password, true);
       outputValues.Add("OpenItemInBrowser", Convert.ToString(Output.OpenItemInBrowser));
       outputValues.Add("FileName", Output.FileName);
-      outputValues.Add("FileFormat", Output.FileFormat);
+      outputValues.Add("FileFormatID", Output.FileFormatID.ToString());
       outputValues.Add("LastProjectID", Output.LastProjectID);
       outputValues.Add("LastIssueID", Output.LastIssueID);
 
@@ -111,7 +111,7 @@ namespace BugShooting.Output.MantisBT
                         OutputValues["UserName", ""],
                         OutputValues["Password", ""], 
                         OutputValues["FileName", "Screenshot"], 
-                        OutputValues["FileFormat", ""],
+                        new Guid(OutputValues["FileFormatID", ""]),
                         Convert.ToBoolean(OutputValues["OpenItemInBrowser", Convert.ToString(true)]),
                         OutputValues["LastProjectID", string.Empty], 
                         OutputValues["LastIssueID", "1"]);
@@ -224,11 +224,11 @@ namespace BugShooting.Output.MantisBT
               projectID = Output.LastProjectID;
             }
 
-            string fullFileName = String.Format("{0}.{1}", send.FileName, FileHelper.GetFileExtension(Output.FileFormat));
-            string fileMimeType = FileHelper.GetMimeType(Output.FileFormat);
-            byte[] fileBytes = FileHelper.GetFileBytes(Output.FileFormat, ImageData);
+            IFileFormat fileFormat = FileHelper.GetFileFormat(Output.FileFormatID);
+            string fullFileName = String.Format("{0}.{1}", send.FileName, fileFormat.FileExtension);
+            byte[] fileBytes = FileHelper.GetFileBytes(Output.FileFormatID, ImageData);
 
-            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fullFileName, fileMimeType, fileBytes));
+            await Task.Factory.StartNew(() => mantisConnect.mc_issue_attachment_add(userName, password, issueID, fullFileName, fileFormat.MimeType, fileBytes));
 
 
             // Open issue in browser
@@ -244,7 +244,7 @@ namespace BugShooting.Output.MantisBT
                                             (rememberCredentials) ? userName : Output.UserName,
                                             (rememberCredentials) ? password : Output.Password,
                                             Output.FileName,
-                                            Output.FileFormat,
+                                            Output.FileFormatID,
                                             Output.OpenItemInBrowser, 
                                             projectID, 
                                             issueID));

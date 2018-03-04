@@ -1,4 +1,4 @@
-﻿using BS.Plugin.V3.Output;
+﻿using System;
 
 namespace BugShooting.Output.MantisBT
 {
@@ -11,7 +11,7 @@ namespace BugShooting.Output.MantisBT
     string userName;
     string password;
     string fileName;
-    string fileFormat;
+    Guid fileFormatID;
     bool openItemInBrowser;
     string lastProjectID;
     string lastIssueID;
@@ -20,8 +20,8 @@ namespace BugShooting.Output.MantisBT
                   string url, 
                   string userName,
                   string password, 
-                  string fileName, 
-                  string fileFormat,
+                  string fileName,
+                  Guid fileFormatID,
                   bool openItemInBrowser, 
                   string lastProjectID, 
                   string lastIssueID)
@@ -31,7 +31,7 @@ namespace BugShooting.Output.MantisBT
       this.userName = userName;
       this.password = password;
       this.fileName = fileName;
-      this.fileFormat = fileFormat;
+      this.fileFormatID = fileFormatID;
       this.openItemInBrowser = openItemInBrowser;
       this.lastProjectID = lastProjectID;
       this.lastIssueID = lastIssueID;
@@ -67,9 +67,9 @@ namespace BugShooting.Output.MantisBT
       get { return fileName; }
     }
 
-    public string FileFormat
+    public Guid FileFormatID
     {
-      get { return fileFormat; }
+      get { return fileFormatID; }
     }
 
     public bool OpenItemInBrowser
