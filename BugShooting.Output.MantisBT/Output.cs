@@ -1,4 +1,5 @@
 ﻿using System;
+using BS.Plugin.V3.Output;
 
 namespace BugShooting.Output.MantisBT
 {
