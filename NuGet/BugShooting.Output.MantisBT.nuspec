@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
 			<id>BugShooting.Output.MantisBT</id>
-			<version>1.0.3</version>
+			<version>1.0.4</version>
 			<title>MantisBT Output for Bug Shooting</title>
       <authors>Bug Shooting, Alexej Hirsch</authors>
       <owners>Bug Shooting, Alexej Hirsch</owners>
@@ -14,6 +14,9 @@
 			<description>Attach screenshots to Mantis BT issues.</description>
 			<copyright />
 			<tags>bugshooting.plugin.v3.output</tags>
+      <packageTypes>
+        <packageType name="bugshooting.plugin.v3.output" />
+      </packageTypes>
     </metadata>
     <files>
 			<file src="BugShooting.Output.MantisBT.dll" />
